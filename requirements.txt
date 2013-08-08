@@ -1,0 +1,11 @@
+django>=1.5,<1.5.99
+PIL==1.1.7
+psycopg2==2.5.1
+South==0.8.1
+Markdown==2.3.1              # Markdown support
+dj-database-url==0.2.2       # For easy database configuration
+django-cms==2.4.2
+django-reversion==1.7.1
+django-filer==0.9.5
+pylibmc==1.2.3
+easy-thumbnails==1.3

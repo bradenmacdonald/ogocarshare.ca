@@ -1,0 +1,11 @@
+# Python Virtual Environment
+venv/
+
+# Local Settings
+.env
+
+# Various caches
+/site_media/
+*.pyc
+*.mo
+Thumbs.db
