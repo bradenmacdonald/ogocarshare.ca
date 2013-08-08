@@ -107,7 +107,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -168,6 +168,7 @@ INSTALLED_APPS = (
     'mptt',
     'filer',
     'sekizai',
+    'compressor',
     # CMS:
     'menus',
     'cms',
@@ -202,6 +203,17 @@ LOGGING = {
         },
     }
 }
+
+# Compressor settings:
+COMPRESS_ENABLED = True
+COMPRESS_ROOT = STATIC_ROOT
+COMPRESS_OUTPUT_DIR = 'cache'  # lower-case the default "CACHE"
+COMPRESS_PRECOMPILERS = (
+    ("text/less", 'ogo.utils.compressor.LessFilter'),
+)
+COMPRESS_CSS_FILTERS = ['ogo.utils.compressor.CssAbsoluteFilterFixed']
+if not DEBUG:
+    COMPRESS_OFFLINE = True
 
 # CMS Settings:
 CMS_TEMPLATES = (

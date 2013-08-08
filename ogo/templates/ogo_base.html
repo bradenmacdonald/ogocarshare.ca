@@ -1,12 +1,41 @@
-{% load sekizai_tags %}
+{% load sekizai_tags compress menu_tags %}
+<!DOCTYPE html>
 <html>
 <head>
 	<title>{% block page_title %}{% if page_title %} {{page_title}} {% else %} OGO {% endif %}{% endblock %}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	{% addtoblock "css" %}
+		{% compress css %}
+			<link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}css/ogo.less" />
+		{% endcompress %}
+	{% endaddtoblock %}
 	{% render_block "css" %}
+	<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.2.0/respond.js"></script>
+	<![endif]-->
 </head>
 <body>
 	{% block body_begin %}{% endblock %}
-	{% block content_area %}Content goes here.{% endblock %}
+	<div class="navbar">
+		<a class="navbar-brand" href="#"><img src="{{STATIC_URL}}nav_logo.png" alt="OGO Car Share Co-Op" width=96 height=36 /></a>
+		<a href="#" class="btn btn-default navbar-btn pull-right">Member login</a>
+		<a href="#" class="btn btn-default navbar-btn pull-right visible-sm" data-toggle="collapse" data-target=".navbar-responsive-collapse">▼ Show menu</a>
+		<div class="nav-collapse collapse navbar-responsive-collapse">
+			<ul class="nav navbar-nav">
+				{% show_menu 0 0 0 0 %}
+			</ul>
+		</div>
+	</div>
+	<div class="container">
+		{% block content_area %}Content goes here.{% endblock %}
+	</div>
+	{% addtoblock "js" %}
+	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	{% compress js %}
+		<script src="{{STATIC_URL}}bootstrap/js/bootstrap.min.js"></script>
+	{% endcompress %}
+	{% endaddtoblock %}
 	{% render_block "js" %}
 </body>
 </html>
