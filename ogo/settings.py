@@ -173,6 +173,8 @@ INSTALLED_APPS = (
     'menus',
     'cms',
     'cms.plugins.text',
+    # OGO:
+    'ogo.plugins'
 )
 
 # A sample logging configuration. The only tangible logging
@@ -240,3 +242,6 @@ FILER_STORAGES = {
         },
     },
 }
+
+# Car Share Everywhere API settings:
+CSE_API_ENDPOINT = os.getenv('CSE_API_ENDPOINT', None)

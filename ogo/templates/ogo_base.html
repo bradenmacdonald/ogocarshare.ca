@@ -30,8 +30,8 @@
 	<div class="container">
 		{% block content_area %}Content goes here.{% endblock %}
 	</div>
-	{% addtoblock "js" %}
 	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	{% addtoblock "js" %}
 	{% compress js %}
 		<script src="{{STATIC_URL}}bootstrap/js/bootstrap.min.js"></script>
 	{% endcompress %}
