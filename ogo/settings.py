@@ -176,6 +176,7 @@ INSTALLED_APPS = (
     'menus',
     'cms',
     'cms.plugins.text',
+    'djangocms_column',
     # OGO:
     'ogo.plugins'
 )
@@ -223,6 +224,21 @@ if not DEBUG:
 # CMS Settings:
 CMS_TEMPLATES = (
     ('ogo_cms_page.html', 'OGO Regular Page'),
+)
+
+# CMS multi-column plugin settings:
+COLUMN_WIDTH_CHOICES = (
+    ('1', "1/12"),
+    ('2', "1/6"),
+    ('3', "1/4"),
+    ('5', "5/12"),
+    ('6', "1/2"),
+    ('7', "7/12"),
+    ('8', "2/3"),
+    ('9', "3/4"),
+    ('10', "5/6"),
+    ('11', "11/12"),
+    ('12', "full"),
 )
 
 # Filer settings:
