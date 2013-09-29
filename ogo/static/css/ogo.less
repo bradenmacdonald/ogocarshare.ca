@@ -10,32 +10,34 @@
 	.navbar-brand {
 		padding-top: 7px;
 		padding-bottom: 7px;
+		@media (max-width: @screen-xs-max) {
+			float: none;
+			img {
+				display: block;
+				margin: 0 auto;
+			}
+		}
 	}
 	@media (min-width: @screen-tablet) {
-		.btn.pull-right { margin-bottom: 8px; }
+		.btn.navbar-right { margin-bottom: 8px; }
 	}
-	@media (max-width: 767px) {
-		.btn.pull-right {
+	@media (max-width: @screen-xs-max) {
+		.btn.navbar-right {
 			width: 50%;
-		}
-		.navbar-responsive-collapse {
-			// Don't hide the nav buttons behind the menu:
-			clear: right;
+			float: right;
 		}
 	}
 }
 
-// On desktops, make the top nav fixed:
-@media (min-width: @screen-small) {
-	body { padding-top: 110px; }
-	.navbar { .navbar-fixed-top; }
-	.navbar-nav { clear: right; }
+// Set the padding required for a fixed nav:
+@media (max-width: @screen-sm-max) {
+	body { padding-top: 110px; } // On phone and tablet, the navbar is two rows tall
 }
-@media (min-width: @screen-medium) {
+@media (min-width: @screen-desktop) {
 	body { padding-top: 60px; }
-	html.cms_toolbar-toolbar .navbar { top: 42px; } // Don't interfere with django toolbar
-	.navbar-nav { clear: none; }
 }
+// Don't interfere with django toolbar:
+html.cms_toolbar-toolbar .navbar { top: 42px; }
 
 // For partner logos
 
@@ -56,8 +58,8 @@
 			margin: 0 auto;
 		}
 	}
-	@media (max-width: 767px) { width: 46%; }
-	@media (min-width: @screen-large) { width: 21%; }
+	@media (max-width: @screen-xs-max) { width: 46%; }
+	@media (min-width: @screen-lg) { width: 21%; }
 }
 .partner-logo + *:not(.partner-logo) {
 	clear: left;

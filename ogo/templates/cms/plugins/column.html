@@ -1,5 +1,5 @@
 {% load cms_tags %}
-<div class="col-{{instance.width}}">
+<div class="col-md-{{instance.width}}">
 {% for plugin in instance.child_plugin_instances %}
     	{% render_plugin plugin %}
 {% endfor %}

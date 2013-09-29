@@ -17,11 +17,13 @@
 </head>
 <body>
 	{% block body_begin %}{% endblock %}
-	<div class="navbar">
-		<a class="navbar-brand" href="#"><img src="{{STATIC_URL}}nav_logo.png" alt="OGO Car Share Co-Op" width=96 height=36 /></a>
-		<a href="https://carshareverywhere.net/ogo/" class="btn btn-default navbar-btn pull-right">Member login</a>
-		<a href="#" class="btn btn-default navbar-btn pull-right visible-sm" data-toggle="collapse" data-target=".navbar-responsive-collapse">▼ Show menu</a>
-		<div class="nav-collapse collapse navbar-responsive-collapse">
+	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#"><img src="{{STATIC_URL}}nav_logo.png" alt="OGO Car Share Co-Op" width=96 height=36 /></a>
+		</div>
+		<a href="https://carshareverywhere.net/ogo/" class="btn btn-default navbar-btn navbar-right">Member login</a>
+		<a href="#" class="btn btn-default navbar-btn navbar-right visible-xs" data-toggle="collapse" data-target=".navbar-ex1-collapse">▼ Show menu</a>
+		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav">
 				{% show_menu 0 0 0 0 %}
 			</ul>
