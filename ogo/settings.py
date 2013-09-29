@@ -110,6 +110,9 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
+# Whether Django should serve media files (user uploads) with its built-in server
+SERVE_MEDIA_FILES = (os.getenv("SERVE_MEDIA_FILES", "yes" if DEBUG else "no") == "yes")
+
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = os.getenv('SECRET_KEY', None)
 

@@ -12,3 +12,11 @@ urlpatterns = patterns('',
     # Anything else is handled by the CMS:
     url(r'^', include('cms.urls')),
 )
+
+if settings.SERVE_MEDIA_FILES:
+    # On development servers, we need to manually specify that the media files
+    # should be served:
+    prefix = settings.MEDIA_URL.strip('/') + '/'
+    urlpatterns += patterns('',
+        url(prefix + r'(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, }),
+    )

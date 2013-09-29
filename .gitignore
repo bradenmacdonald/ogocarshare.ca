@@ -6,6 +6,7 @@ venv/
 
 # Various caches
 /site_media/
+/user_media/
 *.pyc
 *.mo
 Thumbs.db
