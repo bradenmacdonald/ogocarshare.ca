@@ -1,6 +1,9 @@
 @import "../bootstrap/less/variables.less";
 
 // Set variables here:
+@ogo-red: #ba272e;
+@brand-primary: @ogo-red;
+
 
 @import "../bootstrap/less/bootstrap.less";
 
@@ -8,20 +11,31 @@
 
 .navbar {
 	.navbar-brand {
+		color: black;
+		font-size: 22px;
 		padding-top: 7px;
 		padding-bottom: 7px;
-		@media (max-width: @screen-xs-max) {
+		&:hover { color: black; }
+		img { margin-right: 15px; }
+	}
+	.btn.navbar-right { margin-bottom: 8px; }
+	.navbar-nav>li>a { padding-top: 10px; padding-bottom: 10px; &:active { outline-style: none; } }
+	.navbar-nav>.active>a {
+		border-radius: 5px 5px 0 0;
+	}
+	// Change the header configuration on phones:
+	@media (max-width: @screen-xs-max) {
+		.navbar-brand {
 			float: none;
+			display: block;
 			img {
 				display: block;
 				margin: 0 auto;
 			}
+			font-size: 0;
+			text-indent: -9999px;
+			line-height: 0;
 		}
-	}
-	@media (min-width: @screen-tablet) {
-		.btn.navbar-right { margin-bottom: 8px; }
-	}
-	@media (max-width: @screen-xs-max) {
 		.btn.navbar-right {
 			width: 50%;
 			float: right;
@@ -30,12 +44,8 @@
 }
 
 // Set the padding required for a fixed nav:
-@media (max-width: @screen-sm-max) {
-	body { padding-top: 110px; } // On phone and tablet, the navbar is two rows tall
-}
-@media (min-width: @screen-desktop) {
-	body { padding-top: 60px; }
-}
+body { padding-top: 110px; }
+
 // Don't interfere with django toolbar:
 html.cms_toolbar-toolbar .navbar { top: 42px; }
 
