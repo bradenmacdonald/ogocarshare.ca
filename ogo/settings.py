@@ -248,16 +248,20 @@ FILER_STORAGES = {
         'main': {
             'ENGINE': 'filer.storage.PublicFileSystemStorage',
             'OPTIONS': {
-                'location': os.path.join(PROJECT_ROOT, "site_media", "f"),
-                'base_url': '/static/f/',
+                'location': MEDIA_ROOT,
+                'base_url': MEDIA_URL,
             },
             'UPLOAD_TO': 'ogo.utils.filer.filer_namer',
+            'UPLOAD_TO_PREFIX': 'f',
         },
         'thumbnails': {
             'ENGINE': 'filer.storage.PublicFileSystemStorage',
             'OPTIONS': {
-                'location': os.path.join(PROJECT_ROOT, "site_media", "f_thumbs",),
-                'base_url': '/static/f_thumbs/',
+                'location': MEDIA_ROOT,
+                'base_url': MEDIA_URL,
+            },
+            'THUMBNAIL_OPTIONS': {
+                'base_dir': 'thumbs',
             },
         },
     },
