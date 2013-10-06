@@ -35,7 +35,7 @@ class PartnerPlugin(CMSPluginBase):
         # Comute what sort of margin_top the template needs to use to
         # center the logo inside an area with a 2:1 ratio
         box_ratio = 2
-        ratio = instance.logo_w / instance.logo_h
+        ratio = instance.logo._width / instance.logo._height
         if ratio > box_ratio:
             print("\n{}".format(instance.link))
             print("height of small logo = W / ratio = W / {}".format(ratio))

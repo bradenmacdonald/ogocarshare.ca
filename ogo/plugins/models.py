@@ -1,6 +1,7 @@
 from django.db import models
 from cms.models import CMSPlugin
 from django.core.validators import URLValidator
+from filer.fields.image import FilerImageField
 
 
 def _partner_logo_upload_to(inst, orig_filename):
@@ -14,9 +15,7 @@ class Partner(CMSPlugin):
 
     name = models.CharField(max_length=128)
     link = models.CharField(max_length=255, blank=True, null=True, validators=[URLValidator(), ])
-    logo = models.ImageField(null=False, blank=False, upload_to=_partner_logo_upload_to, width_field='logo_w', height_field='logo_h')
-    logo_w = models.IntegerField(null=True)
-    logo_h = models.IntegerField(null=True)
+    logo = FilerImageField(null=False, blank=False)
 
     def __unicode__(self):
         return self.name
