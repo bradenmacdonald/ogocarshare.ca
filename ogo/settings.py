@@ -178,6 +178,7 @@ INSTALLED_APPS = (
     'cms.plugins.text',
     'djangocms_column',
     'cmsplugin_youtube',
+    'cmsplugin_html',
     # OGO:
     'ogo.plugins'
 )

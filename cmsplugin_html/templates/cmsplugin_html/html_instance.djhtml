@@ -1,0 +1,17 @@
+{% load sekizai_tags %}
+
+{{ plugin_html|safe }}
+
+{% addtoblock "js" %}
+    {% if plugin_js %}
+        {{ plugin_js|safe }}
+    {% endif %}
+{% endaddtoblock %}
+
+{% addtoblock "css" %}
+    {% if plugin_css %}
+        <style type="text/css">
+        {{ plugin_css|safe }}
+        </style>
+    {% endif %}
+{% endaddtoblock %}

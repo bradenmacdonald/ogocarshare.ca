@@ -1,0 +1,45 @@
+{% extends "admin/cms/page/plugin_change_form.html" %}
+
+{% block extrahead %}{{ block.super }}
+	<script src="{{ STATIC_URL}}cmsplugin_html/js/ace/ace.js"></script>
+	<script src="{{ STATIC_URL}}cmsplugin_html/js/ace/mode-html.js"></script>
+	<script type="text/javascript">
+	//(function($) {
+	$(function() {
+		var html_textarea = $("#id_html").hide();
+		$('<div id=html_editor style="position: relative; height: 250px; width: auto; border: 1px solid #ddd;"></div>').insertAfter(html_textarea);
+		var editor_html = ace.edit("html_editor");
+		//editor_html.setTheme("ace/theme/monokai");
+		editor_html.setShowPrintMargin(false);
+		editor_html.getSession().setValue(html_textarea.val());
+		editor_html.getSession().setMode('ace/mode/html');
+		editor_html.getSession().on('change', function(){
+			html_textarea.val(editor_html.getSession().getValue());
+		});
+
+
+		var css_textarea = $("#id_css").hide();
+		$('<div id=css_editor style="position: relative; height: 120px; width: auto; border: 1px solid #ddd;"></div>').insertAfter(css_textarea);
+		var editor_css = ace.edit("css_editor");
+		//editor_css.setTheme("ace/theme/monokai");
+		editor_css.setShowPrintMargin(false);
+		editor_css.getSession().setValue(css_textarea.val());
+		editor_css.getSession().setMode('ace/mode/css');
+		editor_css.getSession().on('change', function(){
+			css_textarea.val(editor_css.getSession().getValue());
+		});
+
+		var js_textarea = $("#id_js").hide();
+		$('<div id=js_editor style="position: relative; height: 120px; width: auto; border: 1px solid #ddd;"></div>').insertAfter(js_textarea);
+		var editor_js = ace.edit("js_editor");
+		//editor_js.setTheme("ace/theme/monokai");
+		editor_js.setShowPrintMargin(false);
+		editor_js.getSession().setValue(js_textarea.val());
+		editor_js.getSession().setMode('ace/mode/html');
+		editor_js.getSession().on('change', function(){
+			js_textarea.val(editor_js.getSession().getValue());
+		});
+	});
+	//})(window.CMS.$);
+	</script>
+{% endblock %}
