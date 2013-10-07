@@ -1,0 +1,13 @@
+{# Style using custom CSS or override this template #}
+<div class="cms-img
+{% if mode == FIT_WIDTH %} cms-img-fit-width{% endif %}
+{% if mode == FLOAT_LEFT %} cms-img-float-left{% endif %}
+{% if mode == FLOAT_RIGHT %} cms-img-float-right{% endif %}
+{% if frame %} cms-img-frame{% endif %}">
+	{% if link %}<a href="{{link}}">{% endif %}
+	<img src="{{img_url}}" alt="{{alt_text}}" />
+	{% if link %}</a>{% endif %}
+	{% if caption %}
+		<div class="cms-img-caption">{{caption|safe}}</div>
+	{% endif %}
+</div>

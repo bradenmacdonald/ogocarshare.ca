@@ -50,6 +50,30 @@ body { padding-top: 110px; }
 // Don't interfere with django toolbar:
 html.cms_toolbar-toolbar .navbar { top: 42px; }
 
+// For images using the CMS image plugin:
+
+.cms-img {
+	margin-bottom: 10px;
+	img { width: 100%; border: 0 none; }
+	.cms-img-caption {
+		font-size: 12px;
+		margin-top: 5px;
+	}
+	&.cms-img-float-right {
+		width: 30%;
+		float: right;
+		clear: right;
+		margin-left: 10px;
+	}
+	&.cms-img-float-left {
+		width: 30%;
+		float: left;
+		clear: left;
+		margin-right: 10px;
+	}
+	&.cms-img-frame { .img-thumbnail }
+}
+
 // For partner logos
 
 .partner-logo {
