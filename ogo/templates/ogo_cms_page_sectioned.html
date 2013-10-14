@@ -1,0 +1,21 @@
+{% extends "ogo_cms_page.html" %}
+{% load cms_tags %}
+
+{% block body_tag_extra_attrs %}{{block.super}} data-spy="scroll" data-target="#left-nav"{% endblock %}
+
+{% block content_area %}
+	<div class="row">
+		<div class="col-md-3" id="left-nav">
+			<ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="0">
+				{% for p in request.current_page.placeholders.all.0.get_plugins_list %}
+					{% if p.plugin_type == "PageSectionPlugin" %}
+						<li><a href="#{{ p.pagesection.fragment_id }}">{{ p.pagesection.title }}</a></li>
+					{% endif %}
+				{% endfor %}
+			</ul>
+		</div>
+		<div class="col-md-9">
+			{% placeholder content %}
+		</div>
+	</div>
+{% endblock %}

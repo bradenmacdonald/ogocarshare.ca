@@ -20,3 +20,10 @@ class Partner(CMSPlugin):
     def __unicode__(self):
         return self.name
 
+class PageSection(CMSPlugin):
+    title = models.CharField(max_length=128)
+    fragment_id = models.SlugField(max_length=32, null=False, blank=False, verbose_name="ID", help_text="A short, unique, no-spaces, word or phrase that will appear in the URL if people link directly to this section.")
+    visible = models.BooleanField(null=False, default=True)
+
+    def __unicode__(self):
+        return u"Section: {}".format(self.title)

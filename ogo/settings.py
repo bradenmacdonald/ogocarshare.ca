@@ -227,6 +227,7 @@ if not DEBUG:
 # CMS Settings:
 CMS_TEMPLATES = (
     ('ogo_cms_page.html', 'OGO Regular Page'),
+    ('ogo_cms_page_sectioned.html', 'OGO Sectioned Page'),
 )
 
 # CMS multi-column plugin settings:

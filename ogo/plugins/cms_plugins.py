@@ -1,10 +1,9 @@
 from __future__ import division
-from datetime import date
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.contrib import admin
 from django.utils.translation import ugettext as _
-from .models import Partner
+from .models import Partner, PageSection
 
 
 class CarMapPlugin(CMSPluginBase):
@@ -48,8 +47,20 @@ class PartnerPlugin(CMSPluginBase):
 plugin_pool.register_plugin(PartnerPlugin)
 
 
-#height of small logo = W / ratio
-#height of box = W / box_ratio
-#difference = (W / box_ratio) - (W / ratio)
-#difference / 2 = ((W / box_ratio) - (W / ratio)) / 2
-#top_margin / W = (2 / box_ratio) - (2 / ratio)
+class PageSectionPlugin(CMSPluginBase):
+    model = PageSection
+    name = _("Page Section")
+    render_template = "plugins/section.djhtml"
+    frontend_edit_template = "plugins/section_edit.djhtml"
+    admin_preview = False
+    fields = ("title", "fragment_id", "visible")
+
+    def render(self, context, instance, placeholder):
+        context.update({
+            'title': instance.title,
+            'fragment_id': instance.fragment_id,
+            'visible': instance.visible,
+        })
+        return context
+
+plugin_pool.register_plugin(PageSectionPlugin)

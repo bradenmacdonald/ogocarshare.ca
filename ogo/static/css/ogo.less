@@ -50,6 +50,28 @@ body { padding-top: 110px; }
 // Don't interfere with django toolbar:
 html.cms_toolbar-toolbar .navbar { top: 42px; }
 
+// For the left nav:
+
+#left-nav {
+	.affix {
+		// When affix is applied, it uses position:fixed which takes
+		// the element out of the flow, so we must manually specify widths:
+		width: 212.5px;
+		@media(min-width: @screen-lg) {
+			width: 262.5px;
+		}
+		@media(max-width: @screen-sm-max) {
+			position: static;
+			width: auto;
+			.active a { background-color: transparent; color: @brand-primary; }
+		}
+	}
+	@media(max-width: @screen-sm-max) {
+		margin-bottom: 20px;
+		&::before { content: "On this page:" }
+	}
+}
+
 // For images using the CMS image plugin:
 
 .cms-img {
