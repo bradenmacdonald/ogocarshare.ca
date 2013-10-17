@@ -1,5 +1,5 @@
 {% if visible %}
-	<h2 id="{{fragment_id}}">{{ title }}</h2>
+	<h2 id="{{fragment_id}}" class="scroll-header-fix">{{ title }}</h2>
 {% else %}
-	<div id="{{fragment_id}}"></div>
+	<div id="{{fragment_id}}" class="scroll-header-fix"></div>
 {% endif %}
