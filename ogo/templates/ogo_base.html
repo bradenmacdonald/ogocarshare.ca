@@ -17,19 +17,16 @@
 </head>
 <body{% block body_tag_extra_attrs %}{% endblock %}>
 	{% block body_begin %}{% endblock %}
-	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="/">
-				<img src="{{STATIC_URL}}nav_logo.png" alt="OGO" width=96 height=36 />
-				Okanagan Car Share Co-Op
-			</a>
-		</div>
-		<a href="https://carshareverywhere.net/ogo/" class="btn btn-default navbar-btn navbar-right">Member login</a>
-		<a href="#" class="btn btn-default navbar-btn navbar-right visible-xs" data-toggle="collapse" data-target=".navbar-ex1-collapse">▼ Show menu</a>
-		<div class="collapse navbar-collapse navbar-ex1-collapse">
-			<ul class="nav navbar-nav">
-				{% show_menu 0 0 0 0 %}
-			</ul>
+	<div class="container" id="header" data-spy="affix" data-offset-top="140">
+		<a href="/" id=logo><img alt="OGO: Okanagan Car Share Co-Op" src="{{STATIC_URL}}logo.png" width=340 height=180 /></a>
+		<div class="navbar navbar-default" role="navigation">
+			<a href="https://carshareverywhere.net/ogo/" class="btn btn-default navbar-btn navbar-right">Member login</a>
+			<a href="#" class="btn btn-default navbar-btn navbar-right visible-xs" data-toggle="collapse" data-target=".navbar-ex1-collapse">▼ Show menu</a>
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav">
+					{% show_menu 0 0 0 0 %}
+				</ul>
+			</div>
 		</div>
 	</div>
 	<div class="container">

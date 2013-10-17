@@ -9,21 +9,44 @@
 
 // Overrides and styles here:
 
-.navbar {
-	.navbar-brand {
-		color: black;
-		font-size: 22px;
-		padding-top: 7px;
-		padding-bottom: 7px;
-		&:hover { color: black; }
-		img { margin-right: 15px; }
+.container#header {
+	a#logo {
+		display: block;
+		background-color: @body-bg;
 	}
+	&.affix {
+		width: 100%;
+		margin: 0 auto;
+		left: 50%;
+		top: 0%;
+		z-index: 100;
+		top: -140px;
+		margin-left: -@container-desktop/2;
+		@media (min-width: @screen-sm) { margin-left: -@container-tablet/2; }
+		@media (min-width: @screen-md) { margin-left: -@container-desktop/2; }
+		@media (min-width: @screen-lg) { margin-left: -@container-lg-desktop/2; }
+		// No affix on phones:
+		@media (max-width: @screen-xs-max) {
+			position: static;
+			margin-left: 0;
+		}
+	}
+	@media (min-width: @screen-sm) and (max-width: @screen-sm-max) {
+		.nav>li>a { padding-left: 8px; padding-right: 8px; }
+	}
+}
+.container#header.affix + .container {
+	margin-top: 250px;
+	@media (max-width: @screen-xs-max) { margin-top: 0; }
+}
+
+.navbar {
 	.btn.navbar-right { margin-bottom: 8px; }
-	.navbar-nav { clear: left; } // links are always on a second row.
+	/*.navbar-nav { clear: left; } // links are always on a second row.
 	.navbar-nav>li>a { padding-top: 10px; padding-bottom: 10px; &:active { outline-style: none; } }
 	.navbar-nav>.active>a {
 		border-radius: 5px 5px 0 0;
-	}
+	}*/
 	// Change the header configuration on phones:
 	@media (max-width: @screen-xs-max) {
 		.navbar-brand {
@@ -44,12 +67,6 @@
 	}
 }
 
-// Set the padding required for a fixed nav:
-body { padding-top: 110px; }
-
-// Don't interfere with django toolbar:
-html.cms_toolbar-toolbar .navbar { top: 42px; }
-
 // For the left nav:
 
 #left-nav {
@@ -57,6 +74,7 @@ html.cms_toolbar-toolbar .navbar { top: 42px; }
 		// When affix is applied, it uses position:fixed which takes
 		// the element out of the flow, so we must manually specify widths:
 		width: 212.5px;
+		top: 100px;
 		@media(min-width: @screen-lg) {
 			width: 262.5px;
 		}
