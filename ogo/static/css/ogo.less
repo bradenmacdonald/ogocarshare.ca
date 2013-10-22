@@ -94,6 +94,46 @@ h2.scroll-header-fix, div.scroll-header-fix {
 	padding-top: 100px;
 }
 
+// The footer
+
+footer#footer {
+	&::before {
+		display: block;
+		margin-top: 20px;
+		height: 14px;
+		background-color: @ogo-red;
+		background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAl0lEQVRIx73UMQqAMAyF4Qxe0dWhuxfzBO4eS0EbaaCUpBZMXuCHLO23hW7M7LkldxIIm0ozgwmEvVFZEgKrQW9UxVrQCzUxDfyLdjEL5LYIzALXKEwDQ7EWDMdqEIIJCMMEhGF8wAmJ5S5CYvwJIbFR0A0bAV2xL9Ad64EhmAWGYRoYirVgOFaDEExAGCYgDMtzEBLjtw87WtIRx/uqRAAAAABJRU5ErkJggg==');
+		background-size: auto 14px;
+		content: ' ';
+	}
+	background-color: @ogo-red;
+	color: white;
+	padding-bottom: 5px;
+	nav {
+		ul {
+			margin: 0 0 0 -10px;
+			padding: 0;
+			li {
+				margin: 0;
+				padding: 0;
+				display: inline;
+				display: inline-block;
+				list-style-type: none;
+				margin-right: 10px;
+				&:hover { background: rgba(255,255,255,0.2); }
+					@media (max-width: @screen-sm-max) { display: block; }
+				a {
+					display: inline-block;
+					color: white;
+					text-decoration: none;
+					padding: 10px 10px;
+					@media (max-width: @screen-sm-max) { display: block; }
+				}
+			}
+		}
+	}
+}
+
 // For images using the CMS image plugin:
 
 .cms-img {

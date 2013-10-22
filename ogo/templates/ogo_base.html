@@ -19,7 +19,7 @@
 	{% block body_begin %}{% endblock %}
 	<div class="container" id="header" data-spy="affix" data-offset-top="140">
 		<a href="/" id=logo><img alt="OGO: Okanagan Car Share Co-Op" src="{{STATIC_URL}}logo.png" width=340 height=180 /></a>
-		<div class="navbar navbar-default" role="navigation">
+		<nav class="navbar navbar-default" role="navigation">
 			<a href="https://carshareverywhere.net/ogo/" class="btn btn-default navbar-btn navbar-right">Member login</a>
 			<a href="#" class="btn btn-default navbar-btn navbar-right visible-xs" data-toggle="collapse" data-target=".navbar-ex1-collapse">▼ Show menu</a>
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -27,11 +27,21 @@
 					{% show_menu 0 0 0 0 %}
 				</ul>
 			</div>
-		</div>
+		</nav>
 	</div>
 	<div class="container">
 		{% block content_area %}Content goes here.{% endblock %}
 	</div>
+	<footer id="footer">
+		<div class="container">
+			<nav>
+				<ul>
+					{% show_menu 0 0 0 0 %}
+				</ul>
+			</nav>
+			&copy; 2012-{%now "Y"%} Okanagan Car Share Co-Op.
+		</div>
+	</footer>
 	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 	{% addtoblock "js" %}
 	{% compress js %}
