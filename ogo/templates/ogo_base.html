@@ -17,8 +17,10 @@
 </head>
 <body{% block body_tag_extra_attrs %}{% endblock %}>
 	{% block body_begin %}{% endblock %}
-	<div class="container" id="header" data-spy="affix" data-offset-top="140">
-		<a href="/" id=logo><img alt="OGO: Okanagan Car Share Co-Op" src="{{STATIC_URL}}logo.png" width=340 height=180 /></a>
+	<div class="container" id="header" data-spy="affix" data-offset-top="132">
+		<div id=logo-box>
+			<a href="/" id=logo><img alt="OGO: Okanagan Car Share Co-Op" src="{{STATIC_URL}}logo.png" width=312 height=154 /></a>
+		</div>
 		<nav class="navbar navbar-default" role="navigation">
 			<a href="https://carshareverywhere.net/ogo/" class="btn btn-default navbar-btn navbar-right">Member login</a>
 			<a href="#" class="btn btn-default navbar-btn navbar-right visible-xs" data-toggle="collapse" data-target=".navbar-ex1-collapse">▼ Show menu</a>
