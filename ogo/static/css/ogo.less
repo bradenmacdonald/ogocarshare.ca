@@ -101,6 +101,18 @@ h2.scroll-header-fix, div.scroll-header-fix {
 	padding-top: 100px;
 }
 
+// Body and general styles
+
+h1, h2, h3, h4, h5, h6, .jumbotron h1 {
+	color: @ogo-brown;
+}
+
+#main-content {
+	*:not(.scroll-header-fix) + h1 { border-top: 30px solid transparent; }
+	* + h2 { border-top: 25px solid transparent; &.scroll-header-fix { margin-top: -80px; } }
+	* + h3 { border-top: 15px solid transparent; }
+}
+
 // The footer
 
 footer#footer {
