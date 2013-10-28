@@ -18,22 +18,24 @@
 </head>
 <body{% block body_tag_extra_attrs %}{% endblock %}>
 	{% block body_begin %}{% endblock %}
-	<div class="container" id="header" data-spy="affix" data-offset-top="132">
-		<div id=logo-box>
-			<a href="/" id=logo><img alt="OGO: Okanagan Car Share Co-Op" src="{{STATIC_URL}}logo.png" width=312 height=154 /></a>
-		</div>
-		<nav class="navbar navbar-default" role="navigation">
-			<a href="https://carshareverywhere.net/ogo/" class="btn btn-default navbar-btn navbar-right">Member login</a>
-			<a href="#" class="btn btn-default navbar-btn navbar-right visible-xs" data-toggle="collapse" data-target=".navbar-ex1-collapse">▼ Show menu</a>
-			<div class="collapse navbar-collapse navbar-ex1-collapse">
-				<ul class="nav navbar-nav">
-					{% show_menu 0 0 0 0 %}
-				</ul>
+	<div id=wrap> {# used to push the footer down on short pages #}
+		<div class="container" id="header" data-spy="affix" data-offset-top="132">
+			<div id=logo-box>
+				<a href="/" id=logo><img alt="OGO: Okanagan Car Share Co-Op" src="{{STATIC_URL}}logo.png" width=312 height=154 /></a>
 			</div>
-		</nav>
-	</div>
-	<div class="container" id=main-content>
-		{% block content_area %}Content goes here.{% endblock %}
+			<nav class="navbar navbar-default" role="navigation">
+				<a href="https://carshareverywhere.net/ogo/" class="btn btn-default navbar-btn navbar-right">Member login</a>
+				<a href="#" class="btn btn-default navbar-btn navbar-right visible-xs" data-toggle="collapse" data-target=".navbar-ex1-collapse">▼ Show menu</a>
+				<div class="collapse navbar-collapse navbar-ex1-collapse">
+					<ul class="nav navbar-nav">
+						{% show_menu 0 0 0 0 %}
+					</ul>
+				</div>
+			</nav>
+		</div>
+		<div class="container" id=main-content>
+			{% block content_area %}Content goes here.{% endblock %}
+		</div>
 	</div>
 	<footer id="footer">
 		<div class="container">

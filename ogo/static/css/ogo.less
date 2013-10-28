@@ -116,6 +116,10 @@ h1, h2, h3, h4, h5, h6, .jumbotron h1 {
 
 // The footer
 
+html, body { height: 100%; }
+#wrap { min-height: 100%; }
+#wrap #main-content { padding-bottom: 110px; }
+
 footer#footer {
 	&::before {
 		display: block;
@@ -126,9 +130,12 @@ footer#footer {
 		background-size: auto 14px;
 		content: ' ';
 	}
+	margin-top: -99px;
 	background-color: @ogo-red;
 	color: white;
 	padding-bottom: 5px;
+	height: 80px;
+	position: relative;
 	nav {
 		ul {
 			margin: 0 0 0 -10px;
