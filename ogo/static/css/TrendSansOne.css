@@ -1,0 +1,27 @@
+/* @license
+ * MyFonts Webfont Build ID 2675431, 2013-10-28T01:37:44-0400
+ * 
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are 
+ * explicitly restricted from using the Licensed Webfonts(s).
+ * 
+ * You may obtain a valid license at the URLs below.
+ * 
+ * Webfont: Trend Sans One by Latinotype
+ * URL: http://www.myfonts.com/fonts/latinotype/trend/sans-one/
+ * Copyright: Copyright (c) 2012 by Daniel Hernandez &amp; Paula nazal. All rights reserved.
+ * Licensed pageviews: 10,000
+ * 
+ * 
+ * License: http://www.myfonts.com/viewlicense?type=web&buildid=2675431
+ * 
+ * © 2013 MyFonts Inc
+*/
+
+
+/* @import must be at top of file, otherwise CSS will not work */
+@import url("//hello.myfonts.net/count/28d2e7");
+
+  
+@font-face {font-family: 'TrendSansOne';src: url('webfonts/28D2E7_0_0.eot');src: url('webfonts/28D2E7_0_0.eot?#iefix') format('embedded-opentype'),url('webfonts/28D2E7_0_0.woff') format('woff'),url('webfonts/28D2E7_0_0.ttf') format('truetype');}
+ 

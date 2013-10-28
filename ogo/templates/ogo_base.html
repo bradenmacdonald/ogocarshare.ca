@@ -6,8 +6,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	{% addtoblock "css" %}
 		{% compress css %}
-			<link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}css/ogo.less" />
+		<link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}css/ogo.less" />
 		{% endcompress %}
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/TrendSansOne.css" />
 	{% endaddtoblock %}
 	{% render_block "css" %}
 	<!--[if lt IE 9]>
