@@ -1,0 +1,30 @@
+{% extends "ogo_base.html" %}
+{% load sekizai_tags bootstrap %}
+
+{% block page_title %}Order a Gift Certificate - OGO Carshare{% endblock %}
+
+{% addtoblock "css" %}
+	<style>
+	input#id_amount::before: { content: "$"; }
+	</style>
+{% endaddtoblock %}
+
+{% block content_area %}
+	<h1>Order a Gift Certificate</h1>
+	<form action="" method="post" class="form-horizontal" role="form">
+    {% csrf_token %}
+    {{ form|bootstrap_horizontal }}
+
+
+    <div class="form-group">
+        <div class="col-md-10 col-md-offset-2">
+            <button type="submit" class="btn btn-primary" class="form-control">
+                Proceed to Payment (PayPal)
+            </button>
+            <br><br>
+            <p>Once you have paid, OGO staff will apply the gift as a credit to the recipient's account, and then email you with a confirmation and a printable certificate that you can give to the recipient.</p>
+        </div>
+    </div>
+
+</form>
+{% endblock %}

@@ -113,6 +113,9 @@ STATICFILES_FINDERS = (
 # Whether Django should serve media files (user uploads) with its built-in server
 SERVE_MEDIA_FILES = (os.getenv("SERVE_MEDIA_FILES", "yes" if DEBUG else "no") == "yes")
 
+# Is an https connection available
+HTTPS_AVAILABLE = (os.getenv("HTTPS_AVAILABLE", "no") == "yes")
+
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = os.getenv('SECRET_KEY', None)
 
@@ -172,6 +175,7 @@ INSTALLED_APPS = (
     'filer',
     'sekizai',
     'compressor',
+    'bootstrapform',
     # CMS:
     'menus',
     'cms',
@@ -181,7 +185,8 @@ INSTALLED_APPS = (
     'cmsplugin_html',
     'cmsplugin_img',
     # OGO:
-    'ogo.plugins'
+    'ogo.plugins',
+    'ogo.giftcert',
 )
 
 # A sample logging configuration. The only tangible logging

@@ -7,6 +7,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    url(r'^gift-certificate/', include('ogo.giftcert.urls')),
     # The admin/backend site:
     url(r'^backend/', include(admin.site.urls)),
     # Anything else is handled by the CMS:
