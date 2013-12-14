@@ -11,6 +11,10 @@
 
 {% block content_area %}
 	<h1>Order a Gift Certificate</h1>
+    <p>Give the gift of carsharing! Use this form to buy a gift certificate for any OGO member. Once you have paid, we will apply the gift as a credit to the recipient's account, and then email you with a confirmation and a printable certificate that you can give to the recipient.</p>
+
+    <img src="{{STATIC_URL}}giftcert/ogo_gc.png" style="max-width: 768px; margin: 40px 0; border: 1px solid #ddd; box-shadow: 3px 3px 5px rgba(128,128,128,0.3);" alt="[Image of a gift certificate]" />
+
 	<form action="" method="post" class="form-horizontal" role="form">
     {% csrf_token %}
     {{ form|bootstrap_horizontal }}
@@ -21,8 +25,6 @@
             <button type="submit" class="btn btn-primary" class="form-control">
                 Proceed to Payment (PayPal)
             </button>
-            <br><br>
-            <p>Once you have paid, OGO staff will apply the gift as a credit to the recipient's account, and then email you with a confirmation and a printable certificate that you can give to the recipient.</p>
         </div>
     </div>
 
