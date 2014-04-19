@@ -156,7 +156,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.core.context_processors.media',
     'django.core.context_processors.static',
-    'cms.context_processors.media',
+    'cms.context_processors.cms_settings',
     'sekizai.context_processors.sekizai',
 )
 
@@ -179,7 +179,7 @@ INSTALLED_APPS = (
     # CMS:
     'menus',
     'cms',
-    'cms.plugins.text',
+    'djangocms_text_ckeditor',
     'djangocms_column',
     'cmsplugin_youtube',
     'cmsplugin_html',

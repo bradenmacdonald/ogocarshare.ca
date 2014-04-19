@@ -9,7 +9,6 @@ from .models import Partner, PageSection
 class CarMapPlugin(CMSPluginBase):
     name = _("Map of all cars")
     render_template = "plugins/car_map.djhtml"  # template to render the plugin with
-    admin_preview = False
 
     def render(self, context, instance, placeholder):
         from ogo.utils import cse_api
@@ -26,7 +25,6 @@ class PartnerPlugin(CMSPluginBase):
     model = Partner
     name = _("Partner Logo")
     render_template = "plugins/partner.djhtml"  # template to render the plugin with
-    admin_preview = False
     fields = ("name", "link", "logo")
 
     def render(self, context, instance, placeholder):
@@ -51,8 +49,6 @@ class PageSectionPlugin(CMSPluginBase):
     model = PageSection
     name = _("Page Section")
     render_template = "plugins/section.djhtml"
-    frontend_edit_template = "plugins/section_edit.djhtml"
-    admin_preview = False
     fields = ("title", "fragment_id", "visible")
 
     def render(self, context, instance, placeholder):
