@@ -37,6 +37,19 @@ else:
     import sys
     sys.exit("No DB configured (!)")
 ######################################################################
+if 'USE_MEMCACHED_PREFIX' in os.environ:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
+            'LOCATION': '127.0.0.1:11211',
+            'KEY_PREFIX': os.environ['USE_MEMCACHED_PREFIX']
+        }
+    }
+else:
+    CACHES = {
+        'default': {'BACKEND': 'django.core.cache.backends.locmem.LocMemCache'}
+    }
+######################################################################
 
 DEBUG = (os.getenv("DEBUG", "no") == "yes")
 TEMPLATE_DEBUG = DEBUG
