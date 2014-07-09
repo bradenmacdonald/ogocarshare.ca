@@ -34,10 +34,6 @@ class PartnerPlugin(CMSPluginBase):
         box_ratio = 2
         ratio = instance.logo._width / instance.logo._height
         if ratio > box_ratio:
-            print("\n{}".format(instance.link))
-            print("height of small logo = W / ratio = W / {}".format(ratio))
-            print("height of box = W / box_ratio = W / {}".format(box_ratio))
-            print("difference in height = ")
             mtop = ((1 / box_ratio) - (1 / ratio)) / 2
         context.update({'partner': instance, 'mtop': mtop*100})
         return context
