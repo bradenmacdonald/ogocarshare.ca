@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "description": "The ogocarshare.ca website",
   "dependencies": {
-    "less": "1.4.2",
-    "recess": "1.1.9"
+    "less": "1.7.3",
   }
 }
