@@ -23,7 +23,6 @@
 		background-color: @body-bg;
 	}
 	&.affix {
-		width: 100%;
 		margin: 0 auto;
 		left: 50%;
 		top: 0%;
@@ -100,6 +99,7 @@
 h2.scroll-header-fix, div.scroll-header-fix {
 	margin-top: -100px;
 	padding-top: 100px;
+	pointer-events: none;
 }
 
 // Body and general styles
@@ -134,7 +134,7 @@ footer#footer {
 	background-color: @ogo-red;
 	color: white;
 	padding-bottom: 5px;
-	height: 80px;
+	min-height: 80px;
 	position: relative;
 	nav {
 		ul {
