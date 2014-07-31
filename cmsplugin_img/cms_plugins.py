@@ -1,3 +1,4 @@
+from django.conf import settings
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 #from django.contrib import admin
@@ -12,6 +13,7 @@ class ImagePlugin(CMSPluginBase):
     render_template = "cmsplugin_img/instance.html"  # template to render the plugin with
     admin_preview = False
     fields = ("image", "alt_text", "link", "caption", "template", "quality", "frame", )
+    text_enabled = True
 
     def render(self, context, instance, placeholder):
         if instance.quality == ImageSettings.QUALITY_HIGH:
@@ -35,5 +37,10 @@ class ImagePlugin(CMSPluginBase):
             'FLOAT_RIGHT': ImageSettings.TEMPLATE_FLOAT_RIGHT,
         })
         return context
+
+    def icon_src(self, instance):
+        if instance.image:
+            return get_thumbnailer(instance.image).get_thumbnail({'size': (64, 64)}).url
+        return settings.STATIC_URL + "cmsplugin_img/default.png"
 
 plugin_pool.register_plugin(ImagePlugin)
