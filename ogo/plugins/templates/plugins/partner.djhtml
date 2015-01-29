@@ -1,6 +1,8 @@
 {% load thumbnail %}
 <div class="partner-logo">
-	<a{% if partner.link %} href="{{partner.link}}"{% endif %}>
-		<img src="{% thumbnail partner.logo 600x300 %}" alt="{{partner.name}}" {% if mtop %} style="padding-top: {{mtop}}%;" {% endif %} />
-	</a>
+	<div class="aspect-ratio-2">
+		<a{% if partner.link %} href="{{partner.link}}"{% endif %}>
+			<img src="{% thumbnail partner.logo 600x300 %}" alt="{{partner.name}}" {% if mtop %} style="padding-top: {{mtop}}%;" {% endif %} />
+		</a>
+	</div>
 </div>
