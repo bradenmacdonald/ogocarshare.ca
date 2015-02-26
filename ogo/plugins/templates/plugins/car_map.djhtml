@@ -27,8 +27,8 @@
     $(function() {
       // Set up the map
       var mapOptions = {
-        center: new google.maps.LatLng(49.8836, -119.4824),
-        zoom: 13,
+        center: new google.maps.LatLng(49.9065, -119.4538),
+        zoom: 12,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       };
       var map = new google.maps.Map($("#car-map-{{plugin_id}}")[0], mapOptions);
@@ -47,7 +47,7 @@
         loc.infoContent += "</ul>";
         var marker = new google.maps.Marker({ map: map, position: loc.coords, title: loc.name, icon: car_icon });
         google.maps.event.addListener(marker, 'click', function() {
-          infowindow.content = loc.infoContent;
+          infowindow.setContent(loc.infoContent);
           infowindow.open(map, marker);
         });
       };
