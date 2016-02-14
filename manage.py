@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 import os
 import sys
+import venv
 
-if not hasattr(sys, 'real_prefix'):
+if venv.sys.prefix == venv.sys.base_prefix:
     sys.exit("\nError: please run activate the virtualenv first.\n")
 
 if __name__ == "__main__":

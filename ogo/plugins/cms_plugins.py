@@ -15,7 +15,7 @@ class CarMapPlugin(CMSPluginBase):
         fleet = cse_api.get_fleet()
         context['plugin_id'] = instance.pk
         context['car_count'] = fleet['car_count']
-        context['car_locations'] = fleet['locations'].itervalues()
+        context['car_locations'] = fleet['locations'].values()
         context['car_locations_count'] = len(fleet['locations'])
         return context
 

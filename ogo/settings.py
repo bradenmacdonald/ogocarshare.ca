@@ -52,7 +52,6 @@ else:
 ######################################################################
 
 DEBUG = (os.getenv("DEBUG", "no") == "yes")
-TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     ('Braden MacDonald', 'webmaster@ogocarshare.ca'),
@@ -132,12 +131,6 @@ HTTPS_AVAILABLE = (os.getenv("HTTPS_AVAILABLE", "no") == "yes")
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = os.getenv('SECRET_KEY', None)
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-)
-
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -156,22 +149,30 @@ ROOT_URLCONF = 'ogo.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'ogo.wsgi.application'
 
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    os.path.join(OGO_ROOT, "templates"),
-)
-
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.i18n',
-    'django.core.context_processors.request',
-    'django.core.context_processors.media',
-    'django.core.context_processors.static',
-    'cms.context_processors.cms_settings',
-    'sekizai.context_processors.sekizai',
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'APP_DIRS': True,
+        'DIRS': (
+            os.path.join(OGO_ROOT, "templates"),
+        ),
+        'OPTIONS': {
+            'context_processors': (
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                #'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'django.template.context_processors.csrf',
+                'django.template.context_processors.request',
+                'django.contrib.messages.context_processors.messages',
+                'sekizai.context_processors.sekizai',
+                'cms.context_processors.cms_settings',
+            ),
+        }
+    },
+]
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -181,17 +182,16 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'south',
     'reversion',
     'easy_thumbnails',
-    'mptt',
     'filer',
     'sekizai',
     'compressor',
     'bootstrapform',
     # CMS:
-    'menus',
     'cms',
+    'menus',
+    'treebeard',
     'djangocms_text_ckeditor',
     'djangocms_column',
     'cmsplugin_youtube',

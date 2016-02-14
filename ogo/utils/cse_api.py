@@ -27,11 +27,11 @@ def get_fleet():
             # Go through the result, selecting which fields we want to expose
             # and fixing the type of various fields encoded as strings.
             locations = {}
-            for n in new_data["Neighbourhoods"].itervalues():
-                for loc in n["Locations"].itervalues():
+            for n in new_data["Neighbourhoods"].values():
+                for loc in n["Locations"].values():
                     l_id = int(loc['ID'])
                     cars = {}
-                    for c in loc['Cars'].itervalues():
+                    for c in loc['Cars'].values():
                         c_id = int(c["ID"])
                         cars[c_id] = {
                             "id": c_id,
@@ -42,7 +42,7 @@ def get_fleet():
                             "colour": c["Colour"],
                             "seats": int(c["Seats"]),
                             #"plate": c["Plate"],
-                            "accessories": [a for a in c["Accessories"].itervalues()] if c["Accessories"] else [],
+                            "accessories": [a for a in c["Accessories"].values()] if c["Accessories"] else [],
                         }
                     locations[l_id] = {
                         "id": l_id,
