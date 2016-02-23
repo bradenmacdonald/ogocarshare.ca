@@ -200,6 +200,7 @@ INSTALLED_APPS = (
     # OGO:
     'ogo.plugins',
     'ogo.giftcert',
+    'ogo.cms_extensions',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -236,16 +237,19 @@ COMPRESS_ENABLED = True
 COMPRESS_ROOT = STATIC_ROOT
 COMPRESS_OUTPUT_DIR = 'cache'  # lower-case the default "CACHE"
 COMPRESS_PRECOMPILERS = (
-    ("text/less", 'ogo.utils.compressor.LessFilter'),
+    ('text/x-scss', 'ogo.utils.compressor.SassFilter'),
 )
-COMPRESS_CSS_FILTERS = ['ogo.utils.compressor.CssAbsoluteFilterFixed']
+COMPRESS_CSS_FILTERS = (
+    'compressor.filters.css_default.CssAbsoluteFilter',
+    'ogo.utils.compressor.CssAutoprefixerFilter',
+)
 if not DEBUG:
     COMPRESS_OFFLINE = True
 
 # CMS Settings:
 CMS_TEMPLATES = (
-    ('ogo_cms_page.html', 'OGO Regular Page'),
-    ('ogo_cms_page_sectioned.html', 'OGO Sectioned Page'),
+    ('ogo/cms_page.html', 'OGO Regular Page'),
+    ('ogo/cms_page_sectioned.html', 'OGO Sectioned Page'),
 )
 
 # CMS multi-column plugin settings:

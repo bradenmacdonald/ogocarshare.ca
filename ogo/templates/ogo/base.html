@@ -1,0 +1,133 @@
+{% load sekizai_tags compress menu_tags staticfiles cms_tags %}
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="{% page_attribute meta_description %}"/>
+    <meta name="keywords" content="{% page_attribute meta_keywords %}"/>
+
+    <title>{% block page_title %}{% if page_title %} {{page_title}} {% else %} OGO {% endif %}{% endblock %}</title>
+
+    <link rel="icon" type="image/png" href="{% static "favicon/favicon-196x196.png" %}" sizes="196x196" />
+    <link rel="icon" type="image/png" href="{% static "favicon/favicon-96x96.png" %}" sizes="96x96" />
+    <link rel="icon" type="image/png" href="{% static "favicon/favicon-32x32.png" %}" sizes="32x32" />
+    <link rel="icon" type="image/png" href="{% static "favicon/favicon-16x16.png" %}" sizes="16x16" />
+    <link rel="icon" type="image/png" href="{% static "favicon/favicon-128.png" %}" sizes="128x128" />
+    <link rel="shortcut icon" href="{% static "favicon/favicon.ico" %}">
+
+    {% addtoblock "css" %}
+        {% compress css %}
+        <link rel="stylesheet" href="{% static "src/ogo.scss" %}" type="text/x-scss">
+        {% endcompress %}
+        <link rel="stylesheet" href="{% static "css/TrendSansOne.css" %}" />
+        {% endaddtoblock %}
+    {% render_block "css" %}
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="{% block body_tag_class %}{% endblock %}" {% block body_tag_extra_attrs %}{% endblock %}>
+    {% cms_toolbar %}
+    {% block body_begin %}{% endblock %}
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2">
+                    <a href="#">
+                        <img id="main-logo" alt="OGO Car Share Co-op" src="{% static "ogo-car-share-logo.svg" %}">
+                    </a>
+                </div>
+                <div class="col-md-10">
+                    <nav class="navbar navbar-light pull-right" id="nav-row-1">
+                        {% show_menu_below_id "universal_nav" 0 100 100 100 "ogo/menu/universal_nav.html" %}
+                    </nav>
+                    <nav class="navbar navbar-light pull-right" id="nav-row-2">
+                        {% show_menu 0 100 100 100 "ogo/menu/menu.html" %}
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    {% if messages %}
+        <div class="container">
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert alert-dismissable alert-{{ message.tags }}" data-alert="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    {% block mainwrapper %}
+    <div class="container" id="main-container">
+        {% block content_area %}Content goes here.{% endblock %}
+    </div>
+    {% endblock %}
+
+    <div id="prefooter">
+        <div class="container">
+        </div>
+    </div>
+    <footer>
+        <div class="footer-upper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        {% show_menu 0 0 0 0 "ogo/menu/footer.html" %}
+                    </div>
+                    <div class="col-md-3">
+                        Log in<br>Register<br><br>Social
+                    </div>
+                    <div class="col-md-4">
+                        <strong>OGO Car Share Co-op</strong><br>
+                        250-469-6617<br>
+                        <a href="mailto:info@ogocarshare.ca">info@ogocarshare.ca</a><br>
+                        <br>
+                        304 - 1353 Ellis Street<br>
+                        Kelowna, BC&nbsp; &nbsp;V1Y&nbsp;1Z9
+                    </div>
+                    <div class="col-md-2">
+                        <a href="/">
+                            <img id="footer-r-logo" alt="Home" src="{% static "ogo-car-share-logo2.svg" %}">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-lower">
+            <div class="container">
+                <p>©2012-{% now "Y" %} Okanagan Car Share Co-op.</p>
+            </div>
+        </div>
+    </footer>
+
+    {% block external_js %}
+    <!-- TypeKit fonts -->
+    {% endblock %}
+    <script src="//code.jquery.com/jquery-2.2.1.min.js"></script>
+    {% addtoblock "js" %}
+        <script src="https://use.typekit.net/wyc5qwn.js"></script>
+        <script>try{Typekit.load({ async: true });}catch(e){}</script>
+        {% compress js %}
+            <script src="{% static "src/vendor/bootstrap/js/scrollspy.js" %}"></script>
+        {% endcompress %}
+    {% endaddtoblock %}
+    {% render_block "js" %}
+    <script>
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37186349-1']);
+    _gaq.push(['_trackPageview']);
+    if (document.location.hostname == "ogocarshare.ca" || document.location.hostname == "www.ogocarshare.ca") {
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    }
+    </script>
+</body>
+</html>

@@ -1,8 +1,12 @@
 {
-  "name": "ogo",
-  "version": "0.1.0",
-  "description": "The ogocarshare.ca website",
+  "name": "ogo-web",
+  "version": "2.0.0",
+  "description": "Website for OGO Car Share Co-op",
+  "author": "Braden MacDonald",
   "dependencies": {
-    "less": "1.7.3",
-  }
+    "node-sass": "3.4.2",
+    "autoprefixer": "6.3.3",
+    "postcss-cli": "2.5.1"
+  },
+  "devDependencies": {}
 }

@@ -8,15 +8,15 @@ from .models import Partner, PageSection
 
 class CarMapPlugin(CMSPluginBase):
     name = _("Map of all cars")
-    render_template = "plugins/car_map.djhtml"  # template to render the plugin with
+    render_template = "plugins/car_map.html"  # template to render the plugin with
 
     def render(self, context, instance, placeholder):
         from ogo.utils import cse_api
-        fleet = cse_api.get_fleet()
         context['plugin_id'] = instance.pk
-        context['car_count'] = fleet['car_count']
-        context['car_locations'] = fleet['locations'].values()
-        context['car_locations_count'] = len(fleet['locations'])
+        fleet_data = cse_api.get_fleet()
+        context['car_count'] = fleet_data["car_count"]
+        context['locations'] = fleet_data["locations"].values()
+        context['locations_count'] = len(fleet_data["locations"])
         return context
 
 plugin_pool.register_plugin(CarMapPlugin)
@@ -24,7 +24,7 @@ plugin_pool.register_plugin(CarMapPlugin)
 class PartnerPlugin(CMSPluginBase):
     model = Partner
     name = _("Partner Logo")
-    render_template = "plugins/partner.djhtml"  # template to render the plugin with
+    render_template = "plugins/partner.html"  # template to render the plugin with
     fields = ("name", "link", "logo")
 
     def render(self, context, instance, placeholder):
@@ -44,7 +44,7 @@ plugin_pool.register_plugin(PartnerPlugin)
 class PageSectionPlugin(CMSPluginBase):
     model = PageSection
     name = _("Page Section")
-    render_template = "plugins/section.djhtml"
+    render_template = "plugins/section.html"
     fields = ("title", "fragment_id", "visible")
 
     def render(self, context, instance, placeholder):
