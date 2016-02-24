@@ -3,7 +3,7 @@
 <div class="row cars-list">
     {% for car in cars %}
         <div class="col-md-4 car-info">
-            <img src="{% if car.image %}{{ MEDIA_URL }}{% thumbnail car.image 720x480 crop %}{% else %}{% static "car-placeholder.png" %}{% endif %}" alt="Image of Car">
+            <img src="{% if car.image %}{% thumbnail car.image 720x480 crop %}{% else %}{% static "car-placeholder.png" %}{% endif %}" alt="Image of Car">
             <h3>#{{car.id}}: {{ car.colour|capfirst }} {{ car.make }} {{ car.model }} ({{car.year}})</h3>
             <p class="location">Location: {{car.location.name}}</p>
             {% if car.availability %}

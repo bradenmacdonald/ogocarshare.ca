@@ -201,6 +201,7 @@ INSTALLED_APPS = (
     'ogo.plugins',
     'ogo.giftcert',
     'ogo.cms_extensions',
+    'ogo.vehicle_details',
 )
 
 # A sample logging configuration. The only tangible logging

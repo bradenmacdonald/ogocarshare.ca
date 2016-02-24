@@ -4,6 +4,7 @@ from cms.plugin_pool import plugin_pool
 from django.contrib import admin
 from django.utils.translation import ugettext as _
 from ogo.utils import cse_api
+from ogo.vehicle_details.models import VehicleDetails
 from .models import Partner, PageSection
 
 
@@ -38,16 +39,16 @@ class CarListPlugin(CMSPluginBase):
 
     def render(self, context, instance, placeholder):
         context['plugin_id'] = instance.pk
-        #car_details = {c.engage_id: c for c in VehicleDetails.objects.all()}
+        car_details = {c.engage_id: c for c in VehicleDetails.objects.all()}
         fleet_data = cse_api.get_fleet()
         all_cars = []
         for loc in fleet_data["locations"].values():
             for car in loc['cars'].values():
                 car["location"] = loc
                 all_cars.append(car)
-                #if car["id"] in car_details:
-                #    car["description"] = car_details[car["id"]].description
-                #    car["image"] = car_details[car["id"]].image
+                if car["id"] in car_details:
+                    car["description"] = car_details[car["id"]].description
+                    car["image"] = car_details[car["id"]].image
         all_cars = sorted(all_cars, key=lambda car: car["id"])
         all_car_ids = [car["id"] for car in all_cars]
         live_availability = cse_api.get_availability(all_car_ids)
