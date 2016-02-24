@@ -2,7 +2,7 @@
 venv/
 
 # Local Settings
-.env
+private.yaml
 
 # Various caches
 /site_media/

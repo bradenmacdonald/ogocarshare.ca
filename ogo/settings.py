@@ -1,48 +1,50 @@
-# Django settings for OGO
-
-import os
+"""
+Django settings for OGO
+"""
 import os.path
+import yaml
+
+########################################################################################################################
+# Override the following in ../private.yaml:
+LOCAL_SETTINGS = """
+DATABASE:
+    NAME: ogo
+DEBUG: false
+SECRET_KEY:
+# Car Share Everywhere API endpoint
+CSE_API_ENDPOINT:
+# Cache setting - set to a string prefix to enable memcached use:
+USE_MEMCACHED_PREFIX:
+ALLOWED_HOSTS:
+    - www.ogocarshare.ca
+# Is an https connection available?
+HTTPS_AVAILABLE: true
+"""
+
+########################################################################################################################
 
 OGO_ROOT = os.path.abspath(os.path.dirname(__file__))
 PROJECT_ROOT = os.path.normpath(os.path.join(OGO_ROOT, os.path.pardir))
 
-######################################################################
-if 'DATABASE_URL' not in os.environ and 'DATABASE' not in os.environ:
-    # Load the environment from .env
-    # This lets us use ./manage.py without having to 'source .env' first
-    ENV_FILE = PROJECT_ROOT + "/.env"
-    with open(ENV_FILE) as f:
-        envlines = f.readlines()
-    for line in envlines:
-        var, val = line.split('=', 1)
-        val = val.strip()
-        if val[0] == '"' and val[-1] == '"':
-            val = val[1:-1]  # trim quotes
-        os.environ[var] = val
-# For PostgreSQL socket connections, we cannot use DATABASE_URL,
-# so we set them up using DATABASE=dbname
-if 'DATABASE_URL' in os.environ:
-    # "e.g. postgres://user3123:passkja83kd8@ec2-117-21-174-214.compute-1.amazonaws.com:6212/db982398"
-    import dj_database_url
-    DATABASES = {'default': dj_database_url.config()}
-elif 'DATABASE' in os.environ:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': os.environ['DATABASE'],
-            'HOST': '',
-        }
+# Update LOCAL_SETTINGS:
+LOCAL_SETTINGS = yaml.load(LOCAL_SETTINGS)
+with open(PROJECT_ROOT + "/private.yaml") as fh:
+    LOCAL_SETTINGS.update(yaml.load(fh.read()))
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'HOST': '',
     }
-else:
-    import sys
-    sys.exit("No DB configured (!)")
-######################################################################
-if 'USE_MEMCACHED_PREFIX' in os.environ:
+}
+DATABASES['default'].update(LOCAL_SETTINGS['DATABASE'])
+
+if LOCAL_SETTINGS['USE_MEMCACHED_PREFIX']:
     CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
             'LOCATION': '127.0.0.1:11211',
-            'KEY_PREFIX': os.environ['USE_MEMCACHED_PREFIX']
+            'KEY_PREFIX': LOCAL_SETTINGS['USE_MEMCACHED_PREFIX'],
         }
     }
 else:
@@ -51,7 +53,7 @@ else:
     }
 ######################################################################
 
-DEBUG = (os.getenv("DEBUG", "no") == "yes")
+DEBUG = LOCAL_SETTINGS['DEBUG']
 
 ADMINS = (
     ('Braden MacDonald', 'webmaster@ogocarshare.ca'),
@@ -61,7 +63,7 @@ MANAGERS = ADMINS
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['www.ogocarshare.ca', 'ogocarshare.ca']
+ALLOWED_HOSTS = LOCAL_SETTINGS['ALLOWED_HOSTS']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -123,13 +125,13 @@ STATICFILES_FINDERS = (
 )
 
 # Whether Django should serve media files (user uploads) with its built-in server
-SERVE_MEDIA_FILES = (os.getenv("SERVE_MEDIA_FILES", "yes" if DEBUG else "no") == "yes")
+SERVE_MEDIA_FILES = DEBUG
 
-# Is an https connection available
-HTTPS_AVAILABLE = (os.getenv("HTTPS_AVAILABLE", "no") == "yes")
+# Is an https connection available?
+HTTPS_AVAILABLE = LOCAL_SETTINGS['HTTPS_AVAILABLE']
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = os.getenv('SECRET_KEY', None)
+SECRET_KEY = LOCAL_SETTINGS['SECRET_KEY']
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -295,4 +297,4 @@ FILER_STORAGES = {
 }
 
 # Car Share Everywhere API settings:
-CSE_API_ENDPOINT = os.getenv('CSE_API_ENDPOINT', None)
+CSE_API_ENDPOINT = LOCAL_SETTINGS['CSE_API_ENDPOINT']
