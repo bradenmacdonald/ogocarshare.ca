@@ -7,12 +7,20 @@ from django.template import RequestContext
 
 from .models import GiftCert
 
+
 class GCForm(ModelForm):
+    """ Form for ordering a gift certificate """
     class Meta:
         fields = ("recipient_name", "from_name", "from_email", "from_phone", "amount", "notes")
         model = GiftCert
         widgets = {
-            'amount': forms.TextInput(attrs={'placeholder': 'Enter dollar amount (do not include the $ sign)', 'type': 'number', 'step': '1', 'min': '10', 'max': '999'}),
+            'amount': forms.TextInput(attrs={
+                'placeholder': 'Enter dollar amount (do not include the $ sign)',
+                'type': 'number',
+                'step': '1',
+                'min': '10',
+                'max': '999',
+            }),
         }
 
 
@@ -35,6 +43,7 @@ def order(request):
     context['form'] = form
 
     return render_to_response('giftcert/order.html', context_instance=context)
+
 
 def complete(request):
     context = RequestContext(request)

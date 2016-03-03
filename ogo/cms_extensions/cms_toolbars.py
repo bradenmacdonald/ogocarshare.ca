@@ -19,4 +19,8 @@ class FeatureImageExtensionToolbar(ExtensionToolbar):
             page_extension, url = self.get_page_extension_admin()
             if url:
                 # adds a toolbar item
-                current_page_menu.add_modal_item(_('Change Feature Image'), url=url, disabled=not self.toolbar.edit_mode)
+                current_page_menu.add_modal_item(
+                    _('Change Feature Image'),
+                    url=url,
+                    disabled=not self.toolbar.edit_mode,
+                )
