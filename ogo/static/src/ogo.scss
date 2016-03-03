@@ -148,8 +148,20 @@ header {
 ////////////////////////////////////////////////////////////////////////////////////////////////
 /// Main Footer
 footer {
-    color: white;
-    a { color: white; }
+    $footer-text-color: white;
+    $footer-text-hover-color: black;
+
+    color: $footer-text-color;
+
+    a {
+        color: $footer-text-color;
+    }
+
+    a:hover {
+        color: $footer-text-hover-color;
+        text-decoration: none;
+    }
+
     &::before {
         display: block;
         height: 10px;
@@ -158,18 +170,37 @@ footer {
         margin-top: -10px;
         content: ' ';
     }
+
     .footer-upper {
         background-color: $ogo-red;
         padding-top: 2.5em;
         padding-bottom: 2.5em;
         @include clearfix();
     }
+
+    .social-links {
+        svg {
+            width: 30px;
+            height: 30px;
+            margin-right: 1rem;
+
+            path {
+                fill: $footer-text-color;
+            }
+
+            &:hover path {
+                fill: $footer-text-hover-color;
+            }
+        }
+    }
+
     .footer-lower {
         background-color: $ogo-brown;
         padding-top: 1.2em;
         padding-bottom: 0.4em;
         @include clearfix();
     }
+
     #footer-r-logo {
         width: auto;
     }
