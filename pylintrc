@@ -1,0 +1,24 @@
+[master]
+ignore = migrations
+
+[format]
+max-line-length = 120
+
+[messages control]
+no-docstring-rgx = ^(_|Meta)
+docstring-min-length = 3
+dummy-variables-rgx = ^_.*
+generated-members = objects
+disable = 
+    broad-except,
+    invalid-name,
+    locally-disabled,
+    too-many-ancestors,
+    too-many-arguments,
+    too-many-branches,
+    too-many-instance-attributes,
+    too-few-public-methods,
+    too-many-public-methods
+
+[reports]
+reports = no

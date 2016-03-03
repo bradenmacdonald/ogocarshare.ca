@@ -1,7 +1,10 @@
+"""
+OGO's Django template context processors
+"""
 from django.conf import settings
 
 
-def ogo_globals(request):
+def ogo_globals(_request):
     """
     Add some OGO global variables to the request context
     """

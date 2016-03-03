@@ -1,3 +1,4 @@
+""" Views for OGO's gift certificates app """
 from django.conf import settings
 import django.forms as forms
 from django.forms import ModelForm
@@ -25,6 +26,7 @@ class GCForm(ModelForm):
 
 
 def order(request):
+    """ Display and/or process the gift certificate order form """
     # Require that this page be accessed via HTTPS:
     if (not request.is_secure()) and settings.HTTPS_AVAILABLE:
         abs_url = request.build_absolute_uri(request.get_full_path())
@@ -46,5 +48,6 @@ def order(request):
 
 
 def complete(request):
+    """ Display a "Your order is now complete" message """
     context = RequestContext(request)
     return render_to_response('giftcert/order_complete.html', context_instance=context)

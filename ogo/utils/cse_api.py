@@ -4,9 +4,10 @@ API client for Car Share Everywhere.
 You must set CSE_API_ENDPOINT in your settings.
 """
 from datetime import datetime
+import logging
+
 from django.conf import settings
 from django.core.cache import cache
-import logging
 import requests
 
 log = logging.getLogger(__name__)
@@ -19,12 +20,12 @@ def cse_api_query(path, cache_for_seconds=(4*60*60)):
     data = cache.get(cache_key)
     if data is None:
         try:
-            log.debug("Fetching data from CSE API ({})".format(path))
+            log.debug("Fetching data from CSE API (%s)", path)
             data = requests.get(request_url).json()
             if isinstance(data, dict):
                 data["retrieved_at"] = datetime.now()
         except Exception:
-            log.exception("Unable to retrieve CSE API result for path '{}'".format(path))
+            log.exception("Unable to retrieve CSE API result for path '%s'", path)
             return None
         cache.set(cache_key, data, cache_for_seconds)
     return data

@@ -1,11 +1,12 @@
-from datetime import datetime
-from django.conf.urls import patterns, url
+"""
+Integrate the Gift Certificates app with the Django admin site
+"""
 from django.contrib import admin
-from django.http import Http404, HttpResponseRedirect
 from .models import GiftCert
 
 
 class GCAdmin(admin.ModelAdmin):
+    """ Admin class for GiftCert """
     fields = (
         'order_date',
         'recipient_name',

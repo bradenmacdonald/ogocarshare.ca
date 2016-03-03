@@ -1,18 +1,14 @@
-from django.db import models
+"""
+DB models for OGO's Django CMS plugins
+"""
 from cms.models import CMSPlugin
+from django.db import models
 from django.core.validators import URLValidator
 from filer.fields.image import FilerImageField
 
 
-def _partner_logo_upload_to(inst, orig_filename):
-    from django.template.defaultfilters import slugify
-    ext = orig_filename.lower().rsplit('.', 1)[-1]
-    if ext not in ("jpg", "png", "jpeg", "gif"):
-        ext = "img"
-    return "partner-logos/{}.{}".format(slugify(inst.name), ext)
-
-
 class Partner(CMSPlugin):
+    """ Represents a company/organization that is a partner of OGO """
     name = models.CharField(max_length=128)
     link = models.CharField(max_length=255, blank=True, null=True, validators=[URLValidator(), ])
     logo = FilerImageField(null=False, blank=False)
@@ -22,6 +18,9 @@ class Partner(CMSPlugin):
 
 
 class PageSection(CMSPlugin):
+    """
+    Represents a section of a multi-section page
+    """
     title = models.CharField(max_length=128)
     fragment_id = models.SlugField(
         verbose_name="ID", max_length=32, null=False, blank=False,

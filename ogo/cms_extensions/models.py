@@ -1,5 +1,6 @@
-from django.db import models
-
+"""
+Django models that store data required for OGO's CMS extensions
+"""
 from cms.extensions import PageExtension
 from cms.extensions.extension_pool import extension_pool
 from filer.fields.image import FilerImageField

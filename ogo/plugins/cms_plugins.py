@@ -1,7 +1,8 @@
-from __future__ import division
+"""
+OGO's custom Django CMS plugins
+"""
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
-from django.contrib import admin
 from django.utils.translation import ugettext as _
 from ogo.utils import cse_api
 from ogo.vehicle_details.models import VehicleDetails
@@ -34,6 +35,9 @@ plugin_pool.register_plugin(CarMapPlugin)
 
 
 class CarListPlugin(CMSPluginBase):
+    """
+    Plugin that displays a list of all the cars, with pictures and live availability.
+    """
     name = _("List of all cars")
     render_template = "plugins/car_list.html"  # template to render the plugin with
 
@@ -67,6 +71,9 @@ plugin_pool.register_plugin(CarListPlugin)
 
 
 class PartnerPlugin(CMSPluginBase):
+    """
+    Plugin that displays the logo of a partner name/organization
+    """
     model = Partner
     name = _("Partner Logo")
     render_template = "plugins/partner.html"  # template to render the plugin with
@@ -77,7 +84,7 @@ class PartnerPlugin(CMSPluginBase):
         # Comute what sort of margin_top the template needs to use to
         # center the logo inside an area with a 2:1 ratio
         box_ratio = 2
-        ratio = instance.logo._width / instance.logo._height
+        ratio = instance.logo._width / instance.logo._height  # pylint: disable=protected-access
         if ratio > box_ratio:
             mtop = ((1 / box_ratio) - (1 / ratio)) / 2
         context.update({'partner': instance, 'mtop': mtop*100})
@@ -87,6 +94,11 @@ plugin_pool.register_plugin(PartnerPlugin)
 
 
 class PageSectionPlugin(CMSPluginBase):
+    """
+    Plugin used to divide a long page of content into multiple sections
+
+    Each section is displayed in a table of contents and allows direct-linking via an anchor
+    """
     model = PageSection
     name = _("Page Section")
     render_template = "plugins/section.html"

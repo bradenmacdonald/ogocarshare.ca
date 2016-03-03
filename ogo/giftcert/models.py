@@ -1,8 +1,11 @@
+"""
+Models to store OGO gift certificate data
+"""
 from django.db import models
 
 
 class GiftCert(models.Model):
-    " Represents a gift certificate bought as a gift for a member "
+    """ Represents a gift certificate bought as a gift for a member """
     recipient_name = models.CharField(
         max_length=256,
         blank=False,

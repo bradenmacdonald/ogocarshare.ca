@@ -1,9 +1,9 @@
+""" URLs for the OGO website """
 from django.conf import settings
 from django.conf.urls import include, url
-from django.views.generic import RedirectView
-
-# Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+import django.views
+
 admin.autodiscover()
 
 urlpatterns = [
@@ -15,7 +15,6 @@ urlpatterns = [
 ]
 
 if settings.SERVE_MEDIA_FILES:
-    import django.views
     # On development servers, we need to manually specify that the media files
     # should be served:
     prefix = settings.MEDIA_URL.strip('/') + '/'

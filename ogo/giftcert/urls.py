@@ -1,3 +1,4 @@
+""" URLs for OGO's gift certificates app """
 from django.conf.urls import url
 from ogo.giftcert import views
 

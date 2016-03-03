@@ -1,3 +1,4 @@
+""" vehicle_details models """
 from django.db import models
 from filer.fields.image import FilerImageField
 
