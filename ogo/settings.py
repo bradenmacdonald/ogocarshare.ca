@@ -19,6 +19,8 @@ ALLOWED_HOSTS:
     - www.ogocarshare.ca
 # Is an https connection available?
 HTTPS_AVAILABLE: true
+# Google Analytics account to use, e.g. UA-12345678-1
+GOOGLE_ANALYTICS_ACCOUNT:
 """
 
 ########################################################################################################################
@@ -171,6 +173,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'sekizai.context_processors.sekizai',
                 'cms.context_processors.cms_settings',
+                'ogo.utils.context_processors.ogo_globals',
             ),
         }
     },
@@ -298,3 +301,6 @@ FILER_STORAGES = {
 
 # Car Share Everywhere API settings:
 CSE_API_ENDPOINT = LOCAL_SETTINGS['CSE_API_ENDPOINT']
+
+# Google Analytics:
+GOOGLE_ANALYTICS_ACCOUNT = LOCAL_SETTINGS['GOOGLE_ANALYTICS_ACCOUNT']
