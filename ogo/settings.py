@@ -30,7 +30,7 @@ PROJECT_ROOT = os.path.normpath(os.path.join(OGO_ROOT, os.path.pardir))
 
 # Update LOCAL_SETTINGS:
 LOCAL_SETTINGS = yaml.load(LOCAL_SETTINGS)
-with open(PROJECT_ROOT + "/private.yaml") as fh:
+with open(PROJECT_ROOT + "/private.yml") as fh:
     LOCAL_SETTINGS.update(yaml.load(fh.read()))
 
 DATABASES = {
