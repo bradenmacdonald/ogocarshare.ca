@@ -129,7 +129,7 @@ STATICFILES_FINDERS = (
 )
 
 # Whether Django should serve media files (user uploads) with its built-in server
-SERVE_MEDIA_FILES = DEBUG
+SERVE_MEDIA_FILES = LOCAL_SETTINGS.get('SERVE_MEDIA_FILES', DEBUG)
 
 # Is an https connection available?
 HTTPS_AVAILABLE = LOCAL_SETTINGS['HTTPS_AVAILABLE']
