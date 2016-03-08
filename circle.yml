@@ -1,0 +1,20 @@
+---
+machine:
+  python:
+    version: 3.4.3
+dependencies:
+  pre:
+    - pip install -r requirements-testing.txt
+test:
+  pre:
+    - python -m ogo.utils.circleci
+    - pep8 ogo
+    - pylint ogo
+# The following will get copied into private.yaml (by ogo.utils.circleci):
+private_config:
+  DATABASE:
+    NAME: unused
+    TEST:
+      NAME: circle_test
+      USER: ubuntu
+  SECRET_KEY: secre7key4testing
