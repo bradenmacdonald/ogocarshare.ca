@@ -260,6 +260,44 @@ CMS_TEMPLATES = (
     ('ogo/cms_page_sectioned.html', 'OGO Sectioned Page'),
 )
 
+OGO_CMS_CONTENT_PLUGINS = [
+    'TextPlugin',
+    'HTMLPlugin',
+    'ImagePlugin',
+    'YouTubePlugin',
+    'CarMapPlugin',
+    'CarListPlugin',
+    'PartnerPlugin',
+    'MultiColumnPlugin',
+]
+
+# The purpose of the following complex setting is to require that the top-level plugins on each
+# page are either a PageSectionPlugin or a BackgroundImagePlugin
+CMS_PLACEHOLDER_CONF = {
+    'content': {
+        'name' : 'Content',
+        'plugins': ['PageSectionPlugin', 'BackgroundImagePlugin'],
+        'default_plugins':[
+            {
+                'plugin_type':'PageSectionPlugin',
+                'values': {
+                    'title': 'Main Section',
+                },
+            },
+        ],
+        # We need to explicitly override 'child_classes', or else only the two plugins listed
+        # above can be added as children even of those top-level plugins.
+        'child_classes': {
+            'PageSectionPlugin': OGO_CMS_CONTENT_PLUGINS,
+            'BackgroundImagePlugin': OGO_CMS_CONTENT_PLUGINS,
+            'ColumnPlugin': OGO_CMS_CONTENT_PLUGINS,
+            'MultiColumnPlugin': ('ColumnPlugin', ),
+        },
+    },
+}
+for plugin_name in OGO_CMS_CONTENT_PLUGINS:
+    CMS_PLACEHOLDER_CONF['content']['child_classes'].setdefault(plugin_name, OGO_CMS_CONTENT_PLUGINS)
+
 # CMS multi-column plugin settings:
 COLUMN_WIDTH_CHOICES = (
     ('1', "1/12"),

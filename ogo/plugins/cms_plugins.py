@@ -6,7 +6,7 @@ from cms.plugin_pool import plugin_pool
 from django.utils.translation import ugettext as _
 from ogo.utils import cse_api
 from ogo.vehicle_details.models import VehicleDetails
-from .models import Partner, PageSection
+from .models import Partner, PageSection, BackgroundImage
 
 
 class CarMapPlugin(CMSPluginBase):
@@ -102,14 +102,36 @@ class PageSectionPlugin(CMSPluginBase):
     model = PageSection
     name = _("Page Section")
     render_template = "plugins/section.html"
-    fields = ("title", "fragment_id", "visible")
+    fields = ("title", "fragment_id", "show_header")
+    allow_children = True
 
     def render(self, context, instance, placeholder):
         context.update({
             'title': instance.title,
             'fragment_id': instance.fragment_id,
-            'visible': instance.visible,
+            'show_header': instance.show_header,
+            'child_instances': instance.child_plugin_instances,
         })
         return context
 
 plugin_pool.register_plugin(PageSectionPlugin)
+
+
+class BackgroundImagePlugin(CMSPluginBase):
+    """
+    A plugin for displaying a large background image, with content in front of it.
+    """
+    model = BackgroundImage
+    name = _("Background Image with Content")
+    render_template = "plugins/background_image.html"
+    fields = ("image", )
+    allow_children = True
+
+    def render(self, context, instance, placeholder):
+        context.update({
+            'image': instance.image,
+            'child_instances': instance.child_plugin_instances,
+        })
+        return context
+
+plugin_pool.register_plugin(BackgroundImagePlugin)

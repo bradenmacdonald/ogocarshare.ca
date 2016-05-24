@@ -13,7 +13,7 @@ class Partner(CMSPlugin):
     link = models.CharField(max_length=255, blank=True, null=True, validators=[URLValidator(), ])
     logo = FilerImageField(null=False, blank=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -24,12 +24,20 @@ class PageSection(CMSPlugin):
     title = models.CharField(max_length=128)
     fragment_id = models.SlugField(
         verbose_name="ID", max_length=32, null=False, blank=False,
+        default="main",
         help_text=(
             "A short, unique, no-spaces, word or phrase that will appear in the URL if people "
             "link directly to this section."
         ),
     )
-    visible = models.BooleanField(null=False, default=True)
+    show_header = models.BooleanField(null=False, default=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return u"Section: {}".format(self.title)
+
+
+class BackgroundImage(CMSPlugin):
+    """
+    A plugin for displaying a large background image, with content in front of it.
+    """
+    image = FilerImageField(null=False, blank=False)

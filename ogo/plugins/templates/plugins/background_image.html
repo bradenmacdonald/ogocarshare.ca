@@ -1,0 +1,8 @@
+{% load cms_tags %}
+<div class="wide-background-image jumbotron" style="background-image: url('{{ image.url }}');">
+    <div class="container">
+        {% for plugin in child_instances %}
+            {% render_plugin plugin %}
+        {% endfor %}
+    </div>
+</div>
