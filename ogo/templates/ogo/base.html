@@ -129,6 +129,25 @@
             <script src="{% static "src/vendor/bootstrap/js/scrollspy.js" %}"></script>
         {% endcompress %}
     {% endaddtoblock %}
+    {% if has_change_permissions %}
+        {% addtoblock "js" %}
+        <script>
+        $(function() {
+            // Hacky fix for django-cms div.cms-plugin wrappers which mess up the bootstrap grid in edit mode
+            $('.row > .cms-plugin').each(function() {
+                const $row = $(this);
+                // Select a child DIV if it is the only child:
+                const $child = $row.children("div").filter(":first:last");
+                if ($child.length === 1) {
+                    // Move all classes (e.g. columns) from the child to the parent DIV
+                    $row.addClass($child.attr("class"));
+                    $child.attr("class", "");
+                }
+            });
+        });
+        </script>
+        {% endaddtoblock %}
+    {% endif %}
     {% render_block "js" %}
     {% if OGO_GOOGLE_ANALYTICS_ACCOUNT %}
         <script>
