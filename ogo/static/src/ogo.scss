@@ -143,6 +143,26 @@ header {
     margin-top: 2rem;
 }
 
+.red-button {
+    display: block;
+    margin: 0.3em 0;
+    padding: 0.2em;
+
+    background-color: $ogo-red;
+    color: white;
+    box-shadow:
+        inset -2px -2px 2px darken($ogo-red, 10%),
+        inset 2px 0 2px lighten($ogo-red, 10%);
+    font-size: 1.2em;
+    text-align: center;
+    text-decoration: none;
+
+    &:hover {
+        color: white;
+        text-decoration: none;
+    }
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////
 /// Pre Footer (newsletter signup)
 #prefooter {
