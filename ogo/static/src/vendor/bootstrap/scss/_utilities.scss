@@ -14,7 +14,15 @@
   @include pull-right();
 }
 
+.pull-xs-right { // In newer versions of bootstrap v4, responsive helper classes are used instead of e.g. 'pull-right'
+  @include pull-right();
+}
+
 .pull-left {
+  @include pull-left();
+}
+
+.pull-xs-left {
   @include pull-left();
 }
 

@@ -22,19 +22,21 @@ class ImageSettings(CMSPlugin):
         (QUALITY_MED, _('Medium (large images)')),
         (QUALITY_LOW, _('Low (best for smaller images shown in a side column)')),
     )
-    quality = models.IntegerField(null=False, choices=QUALITY_CHOICES, default=QUALITY_MED)
+    quality = models.IntegerField(null=False, choices=QUALITY_CHOICES, default=QUALITY_ORIG)
 
-    TEMPLATE_FIT_WIDTH = 0
+    TEMPLATE_FIT_LEFT = 0
     TEMPLATE_FLOAT_LEFT = 1
     TEMPLATE_FLOAT_RIGHT = 2
+    TEMPLATE_CENTER_BLOCK = 3
     TEMPLATE_MODE_CHOICES = (
-        (TEMPLATE_FIT_WIDTH, _('Fit to width of container')),
+        (TEMPLATE_FIT_LEFT, _('Left, fit within container')),
+        (TEMPLATE_CENTER_BLOCK, _('Center within container')),
         (TEMPLATE_FLOAT_LEFT, _('Float to the left')),
         (TEMPLATE_FLOAT_RIGHT, _('Float to the right')),
     )
-    template = models.IntegerField(null=False, choices=TEMPLATE_MODE_CHOICES, default=TEMPLATE_FLOAT_RIGHT, verbose_name=_('Position'))
+    template = models.IntegerField(null=False, choices=TEMPLATE_MODE_CHOICES, default=TEMPLATE_FIT_LEFT, verbose_name=_('Position'))
 
-    frame = models.BooleanField(null=False, default=True, verbose_name=_("Border"))
+    frame = models.BooleanField(null=False, default=False, verbose_name=_("Border"))
 
     def __unicode__(self):
         return self.image.name

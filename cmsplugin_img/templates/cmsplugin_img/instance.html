@@ -1,13 +1,22 @@
 {# Style using custom CSS or override this template #}
-<div class="cms-img
-{% if mode == FIT_WIDTH %} cms-img-fit-width{% endif %}
-{% if mode == FLOAT_LEFT %} cms-img-float-left{% endif %}
-{% if mode == FLOAT_RIGHT %} cms-img-float-right{% endif %}
-{% if frame %} cms-img-frame{% endif %}">
-	{% if link %}<a href="{{link}}">{% endif %}
-	<img src="{{img_url}}" alt="{{alt_text}}" />
+
+{% if caption %}
+    <figure class="figure {% if mode == FLOAT_LEFT %} pull-xs-left{% endif %}{% if mode == FLOAT_RIGHT %} pull-xs-right{% endif %}{% if mode == CENTER_BLOCK %} center-block {% endif %}">
+{% endif %}
+
+{% if link %}<a href="{{link}}">{% endif %}
+<img src="{{img_url}}" alt="{{alt_text}}" class="img-fluid
+{% if mode == FLOAT_LEFT and not caption %} pull-xs-left {% endif %}
+{% if mode == FLOAT_RIGHT and not caption %} pull-xs-right {% endif %}
+{% if mode == CENTER_BLOCK and not caption %} center-block {% endif %}
+{% if frame %} img-thumbnail {% endif %}
+{% if caption %} figure-img {% endif %}" />
 	{% if link %}</a>{% endif %}
-	{% if caption %}
-		<div class="cms-img-caption">{{caption|safe}}</div>
-	{% endif %}
-</div>
+	
+		<div class="cms-img-caption"></div>
+
+
+{% if caption %}
+    <figcaption class="figure-caption {% if mode == FLOAT_RIGHT %} text-xs-right{% endif %}">{{caption|safe}}</figcaption>
+</figure>
+{% endif %}

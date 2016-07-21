@@ -32,9 +32,9 @@ class ImagePlugin(CMSPluginBase):
             'caption': instance.caption,
             'mode': instance.template,
             'frame': instance.frame,
-            'FIT_WIDTH': ImageSettings.TEMPLATE_FIT_WIDTH,
             'FLOAT_LEFT': ImageSettings.TEMPLATE_FLOAT_LEFT,
             'FLOAT_RIGHT': ImageSettings.TEMPLATE_FLOAT_RIGHT,
+            'CENTER_BLOCK': ImageSettings.TEMPLATE_CENTER_BLOCK,
         })
         return context
 
