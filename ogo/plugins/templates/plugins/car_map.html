@@ -41,6 +41,7 @@
             center: new google.maps.LatLng(49.9065, -119.4538),
             zoom: 12,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
+            scrollwheel: false, // Don't want zoom to "trap" scoll events on the page, since the map is large and there's often content below the map
             mapTypeControl: false,
             streetViewControl: false
         };
@@ -52,6 +53,7 @@
             origin: new google.maps.Point(0,0),
             anchor: new google.maps.Point(16, 36)
         };
+        var bounds = new google.maps.LatLngBounds();
 
         var add_marker = function(loc) {
             loc.infoContent = '<strong style="font-size: 12pt;">' + loc.name + "</strong>: " + loc.cars.length + " car"+(loc.cars.length == 1 ? "":"s")+"<br />";
@@ -70,10 +72,12 @@
                 infowindow.setContent(loc.infoContent);
                 infowindow.open(map, marker);
             });
+            bounds.extend(loc.coords);
         };
         for (var i in locations_list) {
             add_marker(locations_list[i]);
         }
+        map.fitBounds(bounds);
     });
     </script>
 {% endaddtoblock %}
