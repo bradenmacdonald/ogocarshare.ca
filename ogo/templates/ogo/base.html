@@ -126,6 +126,7 @@
         <script src="https://use.typekit.net/wyc5qwn.js"></script>
         <script>try{Typekit.load({ async: true });}catch(e){}</script>
         {% compress js %}
+            <script src="{% static "src/vendor/bootstrap/js/util.js" %}"></script>
             <script src="{% static "src/vendor/bootstrap/js/scrollspy.js" %}"></script>
         {% endcompress %}
     {% endaddtoblock %}

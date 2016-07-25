@@ -14,6 +14,9 @@ $headings-font-family: TrendSansOne, sans-serif;
 $navbar-light-color: $ogo-red;
 $navbar-light-hover-color: $ogo-brown;
 
+$ogo-header-height: 140px;
+$ogo-section-padding-top: 30px;
+
 @import "vendor/bootstrap/scss/bootstrap";
 
 
@@ -31,16 +34,18 @@ body {
     // Grey diagonal stripes on the left:
     background-image: url('data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTI1IiBoZWlnaHQ9IjEyMCI+PGRlZnM+PGcgaWQ9ImwxIj48bGluZSB4MT0iLTEwIiB5MT0iLTEwIiB4Mj0iMTE1IiB5Mj0iMTE1IiBzdHJva2Utd2lkdGg9IjEwIiBzdHJva2U9IiNlYmViZWIiIGNsYXNzPSIub2dvLWJnLWxlZnQtbGluZSIvPjwvZz48L2RlZnM+PHVzZSB4bGluazpocmVmPSIjbDEiIHkgPSI1Ii8+PHVzZSB4bGluazpocmVmPSIjbDEiIHkgPSIzNSIvPjx1c2UgeGxpbms6aHJlZj0iI2wxIiB5ID0iNjUiLz48dXNlIHhsaW5rOmhyZWY9IiNsMSIgeSA9Ijk1Ii8+PHVzZSB4bGluazpocmVmPSIjbDEiIHkgPSItMjUiLz48dXNlIHhsaW5rOmhyZWY9IiNsMSIgeSA9Ii01NSIvPjx1c2UgeGxpbms6aHJlZj0iI2wxIiB5ID0iLTg1Ii8+PHVzZSB4bGluazpocmVmPSIjbDEiIHkgPSItMTE1Ii8+PC9zdmc+');
     background-repeat: repeat-y;
-    padding-top: 140px;
+    padding-top: $ogo-header-height;
+    position: relative; // required for Bootstrap scrollspy
 }
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 /// Main header
+
 header {
     background-color: rgba(255,255,255, 0.8);
     backdrop-filter: blur(5px);
-    min-height: 140px;
+    min-height: $ogo-header-height;
     top: 0;
     left: 0;
     right: 0;
@@ -114,7 +119,7 @@ header {
 .jumbotron.feature-image {
     background-position: center center;
     background-size: cover;
-    margin-top: -140px;
+    margin-top: -$ogo-header-height;
     margin-bottom: 0;
     padding: 0;
 
@@ -135,12 +140,25 @@ header {
     }
 }
 
+/// Page with sections and sticky left nav:
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+#left-nav ul {
+    position: sticky; // Limited browser support, but we have a JS polyfill
+    top: $ogo-header-height + 10px;
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////
 /// Content
 
-#main-container {
-    min-height: 20em;
-    margin-top: 2rem;
+section.container {
+    padding-top: $ogo-section-padding-top;
+
+    &.scroll-header-fix {
+        margin-top: -$ogo-header-height;
+        padding-top: $ogo-header-height + $ogo-section-padding-top;
+        pointer-events: none;
+    }
 }
 
 .red-button {
