@@ -5,6 +5,7 @@ venv/
 private.yml
 
 # Various caches
+node_modules
 /site_media/
 /user_media/
 *.pyc

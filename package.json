@@ -4,9 +4,9 @@
   "description": "Website for OGO Car Share Co-op",
   "author": "Braden MacDonald",
   "dependencies": {
-    "node-sass": "3.4.2",
-    "autoprefixer": "6.3.3",
-    "postcss-cli": "2.5.1"
+    "node-sass": "4.1.1",
+    "autoprefixer": "6.5.4",
+    "postcss-cli": "2.6.0"
   },
   "devDependencies": {}
 }
