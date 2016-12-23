@@ -248,7 +248,7 @@ COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'ogo.utils.compressor.SassFilter'),
 )
 COMPRESS_CSS_FILTERS = (
-    'compressor.filters.css_default.CssAbsoluteFilter',
+    #'compressor.filters.css_default.CssAbsoluteFilter',
     'ogo.utils.compressor.CssAutoprefixerFilter',
 )
 if not DEBUG:
