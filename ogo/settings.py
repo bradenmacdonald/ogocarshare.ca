@@ -248,7 +248,6 @@ COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'ogo.utils.compressor.SassFilter'),
 )
 COMPRESS_CSS_FILTERS = (
-    #'compressor.filters.css_default.CssAbsoluteFilter',
     'ogo.utils.compressor.CssAutoprefixerFilter',
 )
 if not DEBUG:
@@ -275,11 +274,11 @@ OGO_CMS_CONTENT_PLUGINS = [
 # page are either a PageSectionPlugin or a BackgroundImagePlugin
 CMS_PLACEHOLDER_CONF = {
     'content': {
-        'name' : 'Content',
+        'name': 'Content',
         'plugins': ['PageSectionPlugin', 'BackgroundImagePlugin'],
-        'default_plugins':[
+        'default_plugins': [
             {
-                'plugin_type':'PageSectionPlugin',
+                'plugin_type': 'PageSectionPlugin',
                 'values': {
                     'title': 'Main Section',
                 },
