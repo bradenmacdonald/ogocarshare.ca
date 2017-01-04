@@ -37,7 +37,7 @@ body {
     background-repeat: repeat-y;
     padding-top: $ogo-header-height-mobile;
     @include media-breakpoint-up(md) {
-        min-height: $ogo-header-height;
+        padding-top: $ogo-header-height;
     }
     position: relative; // required for Bootstrap scrollspy
 }
