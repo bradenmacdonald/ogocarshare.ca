@@ -32,8 +32,10 @@ h2, h3, h4 {
 /// Body
 body {
     background-color: white;
-    // Grey diagonal stripes on the left:
-    background-image: url('data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTI1IiBoZWlnaHQ9IjEyMCI+PGRlZnM+PGcgaWQ9ImwxIj48bGluZSB4MT0iLTEwIiB5MT0iLTEwIiB4Mj0iMTE1IiB5Mj0iMTE1IiBzdHJva2Utd2lkdGg9IjEwIiBzdHJva2U9IiNlYmViZWIiIGNsYXNzPSIub2dvLWJnLWxlZnQtbGluZSIvPjwvZz48L2RlZnM+PHVzZSB4bGluazpocmVmPSIjbDEiIHkgPSI1Ii8+PHVzZSB4bGluazpocmVmPSIjbDEiIHkgPSIzNSIvPjx1c2UgeGxpbms6aHJlZj0iI2wxIiB5ID0iNjUiLz48dXNlIHhsaW5rOmhyZWY9IiNsMSIgeSA9Ijk1Ii8+PHVzZSB4bGluazpocmVmPSIjbDEiIHkgPSItMjUiLz48dXNlIHhsaW5rOmhyZWY9IiNsMSIgeSA9Ii01NSIvPjx1c2UgeGxpbms6aHJlZj0iI2wxIiB5ID0iLTg1Ii8+PHVzZSB4bGluazpocmVmPSIjbDEiIHkgPSItMTE1Ii8+PC9zdmc+');
+    @include media-breakpoint-up(md) {
+        // Grey diagonal stripes on the left:
+        background-image: url('data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTI1IiBoZWlnaHQ9IjEyMCI+PGRlZnM+PGcgaWQ9ImwxIj48bGluZSB4MT0iLTEwIiB5MT0iLTEwIiB4Mj0iMTE1IiB5Mj0iMTE1IiBzdHJva2Utd2lkdGg9IjEwIiBzdHJva2U9IiNlYmViZWIiIGNsYXNzPSIub2dvLWJnLWxlZnQtbGluZSIvPjwvZz48L2RlZnM+PHVzZSB4bGluazpocmVmPSIjbDEiIHkgPSI1Ii8+PHVzZSB4bGluazpocmVmPSIjbDEiIHkgPSIzNSIvPjx1c2UgeGxpbms6aHJlZj0iI2wxIiB5ID0iNjUiLz48dXNlIHhsaW5rOmhyZWY9IiNsMSIgeSA9Ijk1Ii8+PHVzZSB4bGluazpocmVmPSIjbDEiIHkgPSItMjUiLz48dXNlIHhsaW5rOmhyZWY9IiNsMSIgeSA9Ii01NSIvPjx1c2UgeGxpbms6aHJlZj0iI2wxIiB5ID0iLTg1Ii8+PHVzZSB4bGluazpocmVmPSIjbDEiIHkgPSItMTE1Ii8+PC9zdmc+');
+    }
     background-repeat: repeat-y;
     padding-top: $ogo-header-height-mobile;
     @include media-breakpoint-up(md) {
