@@ -78,16 +78,11 @@ class PartnerPlugin(CMSPluginBase):
     name = _("Partner Logo")
     render_template = "plugins/partner.html"  # template to render the plugin with
     fields = ("name", "link", "logo")
+    parent_classes = ['PartnerLogoSectionPlugin']
+    require_parent = True
 
     def render(self, context, instance, placeholder):
-        mtop = 0
-        # Comute what sort of margin_top the template needs to use to
-        # center the logo inside an area with a 2:1 ratio
-        box_ratio = 2
-        ratio = instance.logo._width / instance.logo._height  # pylint: disable=protected-access
-        if ratio > box_ratio:
-            mtop = ((1 / box_ratio) - (1 / ratio)) / 2
-        context.update({'partner': instance, 'mtop': mtop*100})
+        context.update({'partner': instance})
         return context
 
 plugin_pool.register_plugin(PartnerPlugin)
@@ -115,6 +110,17 @@ class PageSectionPlugin(CMSPluginBase):
         return context
 
 plugin_pool.register_plugin(PageSectionPlugin)
+
+
+class PartnerLogoSectionPlugin(PageSectionPlugin):
+    """
+    Section that holds partner logos and displays them in a grid.
+    """
+    name = _("Page Section with Partner Logos")
+    render_template = 'plugins/section_partner_logos.html'
+    child_classes = ['PartnerPlugin']
+
+plugin_pool.register_plugin(PartnerLogoSectionPlugin)
 
 
 class BackgroundImagePlugin(CMSPluginBase):

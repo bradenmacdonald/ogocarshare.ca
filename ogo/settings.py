@@ -275,7 +275,7 @@ OGO_CMS_CONTENT_PLUGINS = [
 CMS_PLACEHOLDER_CONF = {
     'content': {
         'name': 'Content',
-        'plugins': ['PageSectionPlugin', 'BackgroundImagePlugin'],
+        'plugins': ['PageSectionPlugin', 'BackgroundImagePlugin', 'PartnerLogoSectionPlugin'],
         'default_plugins': [
             {
                 'plugin_type': 'PageSectionPlugin',

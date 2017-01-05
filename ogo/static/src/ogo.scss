@@ -339,3 +339,40 @@ footer {
         }
     }
 }
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+/// Partner Logos
+
+.partner-logos-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.partner-logo {
+    flex-basis: 100%;
+    text-align: center;
+
+    @include media-breakpoint-up(sm) {
+        flex-basis: 50%;
+    }
+    @include media-breakpoint-up(md) {
+        flex-basis: 33%;
+    }
+    @include media-breakpoint-up(lg) {
+        flex-basis: 25%;
+    }
+
+    a {
+        display: inline-block;
+        padding: 10%;
+    }
+    img {
+        display: block;
+        max-width: 100%;
+        max-height: 130px;
+    }
+}
