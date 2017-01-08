@@ -214,13 +214,17 @@ section.container {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-/// Pre Footer (newsletter signup)
+/// Pre Footer (image)
 #prefooter {
     height: 559px;
     background-image: url('/static/knox_footer.jpg');
-    background-position: center 0;
+    background-position: -200px 0; // Make sure we show the car on small screens
     background-size: cover;
     margin-top: 1em;
+
+    @include media-breakpoint-up(md) {
+        background-position: center 0;
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
