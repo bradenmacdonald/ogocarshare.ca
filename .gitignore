@@ -5,6 +5,7 @@ venv/
 private.yml
 
 # Various caches
+OGO.egg-info/
 node_modules
 /site_media/
 /user_media/
