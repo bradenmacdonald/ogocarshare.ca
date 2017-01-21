@@ -1,9 +1,19 @@
+"""
+Models to store OGO gift certificate data
+"""
 from django.db import models
 
 
 class GiftCert(models.Model):
-    " Represents a gift certificate bought as a gift for a member "
-    recipient_name = models.CharField(max_length=256, blank=False, help_text="Enter the full name of the person whose account you would like us to credit. They must be an OGO member in good standing.")
+    """ Represents a gift certificate bought as a gift for a member """
+    recipient_name = models.CharField(
+        max_length=256,
+        blank=False,
+        help_text=(
+            "Enter the full name of the person whose account you would like us to credit. "
+            "They must be an OGO member in good standing."
+        ),
+    )
     from_name = models.CharField(max_length=256, blank=False, verbose_name="From")
     from_email = models.EmailField(max_length=256, blank=False)
     from_phone = models.CharField(max_length=32, blank=True)
@@ -12,7 +22,7 @@ class GiftCert(models.Model):
     notes = models.TextField(blank=True)
     staff_notes = models.TextField(blank=True)
     paid = models.BooleanField(null=False, default=False)
-    applied_to_account = models.BooleanField(null=False, default=False) 
+    applied_to_account = models.BooleanField(null=False, default=False)
     confirmation_sent = models.BooleanField(null=False, default=False)
 
     def clean(self):

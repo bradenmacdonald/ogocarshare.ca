@@ -1,0 +1,7 @@
+DATABASE:
+  NAME: unused
+  TEST:
+    NAME: ogo_test
+    USER: ubuntu
+SECRET_KEY: secre7key4testing
+SERVE_MEDIA_FILES: true

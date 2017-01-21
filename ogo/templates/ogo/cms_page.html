@@ -1,0 +1,26 @@
+{% extends "ogo/base.html" %}
+{% load cms_tags %}
+
+{% block page_title %}{% if page_title %}{{page_title}}{% else %}{% page_attribute "page_title" %}{% endif %}{% endblock %}
+
+{% block body_tag_class %}{% if request.current_page.featureimageextension.feature_image %}has-feature-image{% endif %}{{block.super}}{% endblock %}
+
+{% block body_begin %}
+{% endblock %}
+
+{% block mainwrapper %}
+    {% if request.current_page.featureimageextension.feature_image %}
+    <div class="jumbotron feature-image" style="background-image: url('{{request.current_page.featureimageextension.feature_image.url}}');">
+        <div class="jumbotron-gradient">
+            <div class="container">
+                <h1>{% if page_title %}{{page_title}}{% else %}{% page_attribute "page_title" %}{% endif %}</h1>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content_area %}
+	{% placeholder content %}
+{% endblock %}

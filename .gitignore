@@ -2,9 +2,10 @@
 venv/
 
 # Local Settings
-.env
+private.yml
 
 # Various caches
+node_modules
 /site_media/
 /user_media/
 *.pyc

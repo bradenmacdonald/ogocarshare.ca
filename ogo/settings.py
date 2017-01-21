@@ -1,48 +1,52 @@
-# Django settings for OGO
-
-import os
+"""
+Django settings for OGO
+"""
 import os.path
+import yaml
+
+########################################################################################################################
+# Override the following in ../private.yml:
+LOCAL_SETTINGS = """
+DATABASE:
+    NAME: ogo
+DEBUG: false
+SECRET_KEY:
+# Car Share Everywhere API endpoint
+CSE_API_ENDPOINT:
+# Cache setting - set to a string prefix to enable memcached use:
+USE_MEMCACHED_PREFIX:
+ALLOWED_HOSTS:
+    - www.ogocarshare.ca
+# Is an https connection available?
+HTTPS_AVAILABLE: true
+# Google Analytics account to use, e.g. UA-12345678-1
+GOOGLE_ANALYTICS_ACCOUNT:
+"""
+
+########################################################################################################################
 
 OGO_ROOT = os.path.abspath(os.path.dirname(__file__))
 PROJECT_ROOT = os.path.normpath(os.path.join(OGO_ROOT, os.path.pardir))
 
-######################################################################
-if 'DATABASE_URL' not in os.environ and 'DATABASE' not in os.environ:
-    # Load the environment from .env
-    # This lets us use ./manage.py without having to 'source .env' first
-    ENV_FILE = PROJECT_ROOT + "/.env"
-    with open(ENV_FILE) as f:
-        envlines = f.readlines()
-    for line in envlines:
-        var, val = line.split('=', 1)
-        val = val.strip()
-        if val[0] == '"' and val[-1] == '"':
-            val = val[1:-1]  # trim quotes
-        os.environ[var] = val
-# For PostgreSQL socket connections, we cannot use DATABASE_URL,
-# so we set them up using DATABASE=dbname
-if 'DATABASE_URL' in os.environ:
-    # "e.g. postgres://user3123:passkja83kd8@ec2-117-21-174-214.compute-1.amazonaws.com:6212/db982398"
-    import dj_database_url
-    DATABASES = {'default': dj_database_url.config()}
-elif 'DATABASE' in os.environ:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': os.environ['DATABASE'],
-            'HOST': '',
-        }
+# Update LOCAL_SETTINGS:
+LOCAL_SETTINGS = yaml.load(LOCAL_SETTINGS)
+with open(PROJECT_ROOT + "/private.yml") as fh:
+    LOCAL_SETTINGS.update(yaml.load(fh.read()))
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'HOST': '',
     }
-else:
-    import sys
-    sys.exit("No DB configured (!)")
-######################################################################
-if 'USE_MEMCACHED_PREFIX' in os.environ:
+}
+DATABASES['default'].update(LOCAL_SETTINGS['DATABASE'])
+
+if LOCAL_SETTINGS['USE_MEMCACHED_PREFIX']:
     CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
             'LOCATION': '127.0.0.1:11211',
-            'KEY_PREFIX': os.environ['USE_MEMCACHED_PREFIX']
+            'KEY_PREFIX': LOCAL_SETTINGS['USE_MEMCACHED_PREFIX'],
         }
     }
 else:
@@ -51,8 +55,7 @@ else:
     }
 ######################################################################
 
-DEBUG = (os.getenv("DEBUG", "no") == "yes")
-TEMPLATE_DEBUG = DEBUG
+DEBUG = LOCAL_SETTINGS['DEBUG']
 
 ADMINS = (
     ('Braden MacDonald', 'webmaster@ogocarshare.ca'),
@@ -62,7 +65,7 @@ MANAGERS = ADMINS
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['www.ogocarshare.ca', 'ogocarshare.ca', 'dev.ogocarshare.ca']
+ALLOWED_HOSTS = LOCAL_SETTINGS['ALLOWED_HOSTS']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -90,6 +93,8 @@ USE_L10N = True
 
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
+
+FIXTURE_DIRS = (os.path.join(OGO_ROOT, "fixtures"), )
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
@@ -124,19 +129,13 @@ STATICFILES_FINDERS = (
 )
 
 # Whether Django should serve media files (user uploads) with its built-in server
-SERVE_MEDIA_FILES = (os.getenv("SERVE_MEDIA_FILES", "yes" if DEBUG else "no") == "yes")
+SERVE_MEDIA_FILES = LOCAL_SETTINGS.get('SERVE_MEDIA_FILES', DEBUG)
 
-# Is an https connection available
-HTTPS_AVAILABLE = (os.getenv("HTTPS_AVAILABLE", "no") == "yes")
+# Is an https connection available?
+HTTPS_AVAILABLE = LOCAL_SETTINGS['HTTPS_AVAILABLE']
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = os.getenv('SECRET_KEY', None)
-
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-)
+SECRET_KEY = LOCAL_SETTINGS['SECRET_KEY']
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -156,22 +155,31 @@ ROOT_URLCONF = 'ogo.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'ogo.wsgi.application'
 
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    os.path.join(OGO_ROOT, "templates"),
-)
-
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.i18n',
-    'django.core.context_processors.request',
-    'django.core.context_processors.media',
-    'django.core.context_processors.static',
-    'cms.context_processors.cms_settings',
-    'sekizai.context_processors.sekizai',
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'APP_DIRS': True,
+        'DIRS': (
+            os.path.join(OGO_ROOT, "templates"),
+        ),
+        'OPTIONS': {
+            'context_processors': (
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                # 'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'django.template.context_processors.csrf',
+                'django.template.context_processors.request',
+                'django.contrib.messages.context_processors.messages',
+                'sekizai.context_processors.sekizai',
+                'cms.context_processors.cms_settings',
+                'ogo.utils.context_processors.ogo_globals',
+            ),
+        }
+    },
+]
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -181,17 +189,16 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'south',
     'reversion',
     'easy_thumbnails',
-    'mptt',
     'filer',
     'sekizai',
     'compressor',
     'bootstrapform',
     # CMS:
-    'menus',
     'cms',
+    'menus',
+    'treebeard',
     'djangocms_text_ckeditor',
     'djangocms_column',
     'cmsplugin_youtube',
@@ -200,6 +207,8 @@ INSTALLED_APPS = (
     # OGO:
     'ogo.plugins',
     'ogo.giftcert',
+    'ogo.cms_extensions',
+    'ogo.vehicle_details',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -236,17 +245,57 @@ COMPRESS_ENABLED = True
 COMPRESS_ROOT = STATIC_ROOT
 COMPRESS_OUTPUT_DIR = 'cache'  # lower-case the default "CACHE"
 COMPRESS_PRECOMPILERS = (
-    ("text/less", 'ogo.utils.compressor.LessFilter'),
+    ('text/x-scss', 'ogo.utils.compressor.SassFilter'),
 )
-COMPRESS_CSS_FILTERS = ['ogo.utils.compressor.CssAbsoluteFilterFixed']
+COMPRESS_CSS_FILTERS = (
+    'ogo.utils.compressor.CssAutoprefixerFilter',
+)
 if not DEBUG:
     COMPRESS_OFFLINE = True
 
 # CMS Settings:
 CMS_TEMPLATES = (
-    ('ogo_cms_page.html', 'OGO Regular Page'),
-    ('ogo_cms_page_sectioned.html', 'OGO Sectioned Page'),
+    ('ogo/cms_page.html', 'OGO Regular Page'),
+    ('ogo/cms_page_sectioned.html', 'OGO Sectioned Page'),
 )
+
+OGO_CMS_CONTENT_PLUGINS = [
+    'TextPlugin',
+    'HTMLPlugin',
+    'ImagePlugin',
+    'YouTubePlugin',
+    'CarMapPlugin',
+    'CarListPlugin',
+    'PartnerPlugin',
+    'MultiColumnPlugin',
+]
+
+# The purpose of the following complex setting is to require that the top-level plugins on each
+# page are either a PageSectionPlugin or a BackgroundImagePlugin
+CMS_PLACEHOLDER_CONF = {
+    'content': {
+        'name': 'Content',
+        'plugins': ['PageSectionPlugin', 'BackgroundImagePlugin', 'PartnerLogoSectionPlugin'],
+        'default_plugins': [
+            {
+                'plugin_type': 'PageSectionPlugin',
+                'values': {
+                    'title': 'Main Section',
+                },
+            },
+        ],
+        # We need to explicitly override 'child_classes', or else only the two plugins listed
+        # above can be added as children even of those top-level plugins.
+        'child_classes': {
+            'PageSectionPlugin': OGO_CMS_CONTENT_PLUGINS,
+            'BackgroundImagePlugin': OGO_CMS_CONTENT_PLUGINS,
+            'ColumnPlugin': OGO_CMS_CONTENT_PLUGINS,
+            'MultiColumnPlugin': ('ColumnPlugin', ),
+        },
+    },
+}
+for plugin_name in OGO_CMS_CONTENT_PLUGINS:
+    CMS_PLACEHOLDER_CONF['content']['child_classes'].setdefault(plugin_name, OGO_CMS_CONTENT_PLUGINS)
 
 # CMS multi-column plugin settings:
 COLUMN_WIDTH_CHOICES = (
@@ -290,4 +339,7 @@ FILER_STORAGES = {
 }
 
 # Car Share Everywhere API settings:
-CSE_API_ENDPOINT = os.getenv('CSE_API_ENDPOINT', None)
+CSE_API_ENDPOINT = LOCAL_SETTINGS['CSE_API_ENDPOINT']
+
+# Google Analytics:
+GOOGLE_ANALYTICS_ACCOUNT = LOCAL_SETTINGS['GOOGLE_ANALYTICS_ACCOUNT']

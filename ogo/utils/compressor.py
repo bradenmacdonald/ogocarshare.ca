@@ -1,17 +1,22 @@
-from __future__ import absolute_import
+# pylint: disable=abstract-method
+"""
+Helper classes used to build OGO's theme assets with django-compressor
+"""
 from compressor.filters import CompilerFilter
-from compressor.filters.css_default import CssAbsoluteFilter
-from compressor.utils import staticfiles
 from django.conf import settings
 
 
-class CssAbsoluteFilterFixed(CssAbsoluteFilter):
-    def find(self, basename):
-        if basename and staticfiles.finders:
-            return staticfiles.finders.find(basename)
+class CssAutoprefixerFilter(CompilerFilter):
+    """
+    Filter to pipe CSS through autoprefixer
+
+    autoprefixer adds vendor prefixes to rules where needed.
+    """
+    command = settings.PROJECT_ROOT + "/node_modules/.bin/postcss --use autoprefixer --output {outfile} {infile}"
 
 
-class LessFilter(CompilerFilter):
-    def __init__(self, content, attrs, **kwargs):
-        cmd = settings.PROJECT_ROOT + "/node_modules/less/bin/lessc -x {infile} > {outfile}"
-        super(LessFilter, self).__init__(content, command=cmd, **kwargs)
+class SassFilter(CompilerFilter):
+    """
+    Compile SASS using LibSass
+    """
+    command = settings.PROJECT_ROOT + "/node_modules/.bin/node-sass --output-style compressed {infile} {outfile}"

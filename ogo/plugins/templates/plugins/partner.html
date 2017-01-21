@@ -1,0 +1,6 @@
+{% load thumbnail %}
+<div class="partner-logo">
+	<a{% if partner.link %} href="{{partner.link}}"{% endif %}>
+		<img src="{% thumbnail partner.logo 600x300 %}" alt="{{partner.name}}" />
+	</a>
+</div>

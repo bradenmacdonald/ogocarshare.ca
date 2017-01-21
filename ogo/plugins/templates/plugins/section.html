@@ -1,0 +1,11 @@
+{% load cms_tags %}
+<section id="{{fragment_id}}" class="container scroll-header-fix">
+    {% if show_header %}
+    <h2>{{ title }}</h2>
+    {% endif %}
+    {% block pre_children %}{% endblock %}
+    {% for plugin in child_instances %}
+        {% render_plugin plugin %}
+    {% endfor %}
+    {% block post_children %}{% endblock %}
+</section>

@@ -1,0 +1,19 @@
+---
+machine:
+  node:
+    version: 5.1.0
+  python:
+    version: 3.4.3
+checkout:
+  post:
+    - mv circle-env.yml private.yml
+dependencies:
+  override:
+    - pip install -r requirements.txt
+    - pip install -r requirements-testing.txt
+    - npm install
+test:
+  pre:
+    - pep8 ogo
+    - pylint ogo
+    - python manage.py compress

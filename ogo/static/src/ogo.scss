@@ -1,0 +1,385 @@
+$enable-flex: true;
+
+$ogo-red: #ec1f27;
+$ogo-brown: #3b2316;
+$ogo-gray: #939598;
+$ogo-background: #ebebeb;
+
+$brand-primary: $ogo-red;
+$body-color: $ogo-brown;
+
+$font-family-sans-serif: ff-meta-web-pro, sans-serif;
+$headings-font-family: TrendSansOne, sans-serif;
+
+$navbar-light-color: $ogo-red;
+$navbar-light-hover-color: $ogo-brown;
+
+$ogo-header-height: 140px;
+$ogo-header-height-mobile: 80px;
+$ogo-section-padding-top: 30px;
+
+@import "vendor/bootstrap/scss/bootstrap";
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+/// Generic Rules
+h2, h3, h4 {
+    font-family: $font-family-sans-serif;
+    font-weight: bold;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+/// Body
+body {
+    background-color: white;
+    @include media-breakpoint-up(md) {
+        // Grey diagonal stripes on the left:
+        background-image: url('data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTI1IiBoZWlnaHQ9IjEyMCI+PGRlZnM+PGcgaWQ9ImwxIj48bGluZSB4MT0iLTEwIiB5MT0iLTEwIiB4Mj0iMTE1IiB5Mj0iMTE1IiBzdHJva2Utd2lkdGg9IjEwIiBzdHJva2U9IiNlYmViZWIiIGNsYXNzPSIub2dvLWJnLWxlZnQtbGluZSIvPjwvZz48L2RlZnM+PHVzZSB4bGluazpocmVmPSIjbDEiIHkgPSI1Ii8+PHVzZSB4bGluazpocmVmPSIjbDEiIHkgPSIzNSIvPjx1c2UgeGxpbms6aHJlZj0iI2wxIiB5ID0iNjUiLz48dXNlIHhsaW5rOmhyZWY9IiNsMSIgeSA9Ijk1Ii8+PHVzZSB4bGluazpocmVmPSIjbDEiIHkgPSItMjUiLz48dXNlIHhsaW5rOmhyZWY9IiNsMSIgeSA9Ii01NSIvPjx1c2UgeGxpbms6aHJlZj0iI2wxIiB5ID0iLTg1Ii8+PHVzZSB4bGluazpocmVmPSIjbDEiIHkgPSItMTE1Ii8+PC9zdmc+');
+    }
+    background-repeat: repeat-y;
+    padding-top: $ogo-header-height-mobile;
+    @include media-breakpoint-up(md) {
+        padding-top: $ogo-header-height;
+    }
+    position: relative; // required for Bootstrap scrollspy
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+/// Main header
+
+header {
+    position: fixed;
+    background-color: rgba(255,255,255, 0.8);
+    backdrop-filter: blur(5px);
+    @supports not (backdrop-filter: blur(5px)) {
+        background-color: rgba(255,255,255, 0.9);
+    }
+    min-height: $ogo-header-height-mobile;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: top 200ms;  // for CMS toolbar
+    z-index: $zindex-navbar;
+
+    #main-logo {
+        margin-top: 15px;
+        width: 100%;
+        @include media-breakpoint-up(md) {
+            margin-top: 25px;
+        }
+    }
+
+    @include media-breakpoint-up(md) {
+        min-height: $ogo-header-height;
+    }
+
+    @include media-breakpoint-down(sm) {
+        .no-gutter-mobile {
+            padding: 0;
+        }
+    }
+
+    // The first row of nav links, in red parallelograms
+    #nav-row-1 {
+        padding-top: 0;
+        .nav li.nav-item {
+            background-color: $ogo-red;
+            box-shadow:
+                inset -2px -2px 2px darken($ogo-red, 10%),
+                inset 2px 0 2px lighten($ogo-red, 10%);
+            text-align: center;
+            transform: skew(-20deg);
+            a {
+                color: white;
+                min-width: 100px;
+                transform: none;
+                transform: skew(20deg);
+
+                @include media-breakpoint-down(sm) {
+                    font-size: 13px;
+                    min-width: 62px;
+                    padding-top: 0.3rem;
+                    padding-bottom: 0.3rem;
+                }
+            }
+            &:hover {
+                background-color: $ogo-brown;
+                box-shadow:
+                    inset -2px -2px 2px darken($ogo-brown, 10%),
+                    inset 2px 0 2px lighten($ogo-brown, 10%);
+            }
+        }
+        @include media-breakpoint-up(md) {
+            padding: 0;
+        }
+    }
+
+    // The primary navigation row
+    #nav-row-2 {
+        clear: right;
+    }
+    .toggle-menu-button {
+        clear: right;
+        float: right;
+        border: 0;
+        background-color: transparent;
+        color: $ogo-red;
+        font-weight: bold;
+    }
+
+    // Open navbar dropdowns on hover
+    ul.nav li.dropdown:hover > ul.dropdown-menu {
+        display: block;
+    }
+}
+
+// Fix header position when CMS header is visible
+.cms-toolbar-expanded header {
+    top: 45px;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+/// OGO Background image plugin
+
+.wide-background-image {
+    background-size: cover;
+    background-position: center center;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+/// OGO Page Featured Image
+.jumbotron.feature-image {
+    background-position: center center;
+    background-size: cover;
+    margin-top: -$ogo-header-height;
+    margin-bottom: 0;
+    padding: 0;
+
+    .jumbotron-gradient {
+        background-image: linear-gradient(to bottom, rgba(0,0,0,0) 70%,rgba(0,0,0,0.4) 100%);
+    }
+
+    .container {
+        display: flex;
+        min-height: 30rem;
+    }
+
+    h1 {
+        align-self: flex-end;
+        color: white;
+        font-size: 50px;
+        margin-bottom: 0.4em;
+    }
+}
+
+/// Page with sections and sticky left nav:
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+#left-nav ul {
+    position: sticky; // Limited browser support, but we have a JS polyfill
+    top: $ogo-header-height + 10px;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+/// Content
+
+section.container {
+    padding-top: $ogo-section-padding-top;
+
+    &.scroll-header-fix {
+        margin-top: -$ogo-header-height;
+        padding-top: $ogo-header-height + $ogo-section-padding-top;
+    }
+}
+
+.red-button {
+    display: block;
+    margin: 0.3em 0;
+    padding: 0.2em;
+
+    background-color: $ogo-red;
+    color: white;
+    box-shadow:
+        inset -2px -2px 2px darken($ogo-red, 10%),
+        inset 2px 0 2px lighten($ogo-red, 10%);
+    font-size: 1.2em;
+    text-align: center;
+    text-decoration: none;
+
+    &:hover {
+        color: white;
+        text-decoration: none;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+/// Pre Footer (image)
+#prefooter {
+    height: 559px;
+    background-image: url('/static/knox_footer.jpg');
+    background-position: -200px 0; // Make sure we show the car on small screens
+    background-size: cover;
+    margin-top: 1em;
+
+    @include media-breakpoint-up(md) {
+        background-position: center 0;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+/// Main Footer
+footer {
+    $footer-text-color: white;
+    $footer-text-hover-color: black;
+
+    color: $footer-text-color;
+
+    a {
+        color: $footer-text-color;
+    }
+
+    a:hover {
+        color: $footer-text-hover-color;
+        text-decoration: none;
+    }
+
+    &::before {
+        display: block;
+        height: 10px;
+        background-color: transparent;
+        background-image: url('data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTIiIGhlaWdodD0iMTAiPjxkZWZzPjxnIGlkPSJsaW5lIj48bGluZSB4MT0iMCIgeTE9IjIiIHgyPSI5IiB5Mj0iMTIiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlPSIjZWMxZjI3Ii8+PC9nPjwvZGVmcz48dXNlIHhsaW5rOmhyZWY9IiNsaW5lIiB4PSIwIi8+PHVzZSB4bGluazpocmVmPSIjbGluZSIgeD0iMTIiLz48L3N2Zz4=');
+        margin-top: -10px;
+        content: ' ';
+    }
+
+    .footer-upper {
+        background-color: $ogo-red;
+        padding-top: 2.5em;
+        padding-bottom: 2.5em;
+        @include clearfix();
+    }
+
+    .social-links {
+        svg {
+            width: 30px;
+            height: 30px;
+            margin-right: 1rem;
+
+            path {
+                fill: $footer-text-color;
+            }
+
+            &:hover path {
+                fill: $footer-text-hover-color;
+            }
+        }
+    }
+
+    .footer-lower {
+        background-color: $ogo-brown;
+        padding-top: 1.2em;
+        padding-bottom: 0.4em;
+        @include clearfix();
+    }
+
+    #footer-r-logo {
+        width: 100%;
+        max-width: 40vw;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+/// Cars & Locations Page
+
+.car-map-wrapper {
+    @include clearfix();
+    margin-bottom: 0.8em;
+
+    > .map {
+        border-radius: 20px;
+        width: 100%;
+        min-height: 300px;
+        height: 60vh;
+    }
+
+    .credit {
+        float: right;
+        color: #ccc;
+        font-size: 8px;
+        a {
+            color: inherit;
+        }
+    }
+}
+
+.cars-list {
+    .car-info {
+        margin-bottom: 3em;
+        img {
+            border-radius: 20px;
+            width: 100%;
+            height: auto;
+            padding-bottom: 8px;
+        }
+        h3 {
+            color: $ogo-red;
+            font-family: inherit;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .location {
+            color: $ogo-brown;
+            font-weight: bold;
+            font-style: italic;
+            margin-bottom: 0.3rem;
+        }
+        .availability {
+            &::before { content: "● "; }
+            &.available { color: #2ecc71; }
+            &.available-soon { color: #f39c12; }
+            &.not-available { color: #7f8c8d; }
+            &.not-available::before { content: "○ "; }
+        }
+        .description {
+            margin-top: 0.8em;
+        }
+    }
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+/// Partner Logos
+
+.partner-logos-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.partner-logo {
+    flex-basis: 100%;
+    text-align: center;
+
+    @include media-breakpoint-up(sm) {
+        flex-basis: 50%;
+    }
+    @include media-breakpoint-up(md) {
+        flex-basis: 33%;
+    }
+    @include media-breakpoint-up(lg) {
+        flex-basis: 25%;
+    }
+
+    a {
+        display: inline-block;
+        padding: 10%;
+    }
+    img {
+        display: block;
+        max-width: 100%;
+        max-height: 130px;
+    }
+}

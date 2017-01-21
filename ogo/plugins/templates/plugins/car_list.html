@@ -1,0 +1,28 @@
+{% load staticfiles thumbnail %}
+
+<div class="row cars-list">
+    {% for car in cars %}
+        <div class="col-md-4 car-info">
+            <img src="{% if car.image %}{% thumbnail car.image 720x480 crop %}{% else %}{% static "car-placeholder.png" %}{% endif %}" alt="Image of Car">
+            <h3>#{{car.id}}: {{ car.colour|capfirst }} {{ car.make }} {{ car.model }} ({{car.year}})</h3>
+            <p class="location">Location: {{car.location.name}}</p>
+            {% if car.availability %}
+                {% if car.availability.available %}
+                <span class="availability available">Available Now</span>
+                {% elif car.availability.available_soon %}
+                <span class="availability available-soon">Available at {{car.availability.available_at|date:"P"}}</span>
+                {% else %}
+                <span class="availability not-available">Currently in use</span>
+                {% endif %}
+            {% endif %}
+            {% if car.description %}
+                <p class="description"> {{ car.description }} </p>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+<div class="row">
+    <div class="col-md-12">
+    <p>Availability is updated every 15 minutes. Last updated at {{updated_time|date:"H:i T"}}.</p>
+    </div>
+</div>
