@@ -5,7 +5,7 @@ import os.path
 import yaml
 
 ########################################################################################################################
-# Override the following in ../private.yaml:
+# Override the following in ../private.yml:
 LOCAL_SETTINGS = """
 DATABASE:
     NAME: ogo
