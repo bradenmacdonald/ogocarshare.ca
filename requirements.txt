@@ -7,7 +7,7 @@ PyYAML==3.11
 # Django CMS
 django-reversion==1.10.1
 django-cms==3.4.1
-djangocms-column==1.6.0
+djangocms-column==1.7.0
 djangocms-text-ckeditor==3.3.1
 django-filer==1.1.1
 easy-thumbnails==2.3
