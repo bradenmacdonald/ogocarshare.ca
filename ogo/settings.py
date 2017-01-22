@@ -13,8 +13,8 @@ DEBUG: false
 SECRET_KEY:
 # Car Share Everywhere API endpoint
 CSE_API_ENDPOINT:
-# Cache setting - set to a string prefix to enable memcached use:
-USE_MEMCACHED_PREFIX:
+# Cache setting - set to a string prefix to enable redis cache use:
+USE_REDIS_CACHE_PREFIX:
 ALLOWED_HOSTS:
     - www.ogocarshare.ca
 # Is an https connection available?
@@ -41,12 +41,15 @@ DATABASES = {
 }
 DATABASES['default'].update(LOCAL_SETTINGS['DATABASE'])
 
-if LOCAL_SETTINGS['USE_MEMCACHED_PREFIX']:
+if LOCAL_SETTINGS['USE_REDIS_CACHE_PREFIX']:
     CACHES = {
         'default': {
-            'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
-            'LOCATION': '127.0.0.1:11211',
-            'KEY_PREFIX': LOCAL_SETTINGS['USE_MEMCACHED_PREFIX'],
+            'BACKEND': 'django_redis.cache.RedisCache',
+            'LOCATION': LOCAL_SETTINGS.get('REDIS_URL', 'redis://127.0.0.1:6379/1'),
+            'OPTIONS': {
+                'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            },
+            'KEY_PREFIX': LOCAL_SETTINGS['USE_REDIS_CACHE_PREFIX'],
         }
     }
 else:

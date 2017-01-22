@@ -1,7 +1,7 @@
 # Core stack dependencies
 django>=1.9,<1.9.99
 psycopg2==2.6.1
-pylibmc==1.5.1
+django_redis==4.6.0
 PyYAML==3.11
 
 # Django CMS
