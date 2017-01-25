@@ -1,39 +1,40 @@
-{% extends "ogo_base.html" %}
+{% extends "ogo/base.html" %}
 
 {% block page_title %}Order a Gift Certificate - OGO Carshare{% endblock %}
 
 {% block content_area %}
-	<h1>Order a Gift Certificate: Payment</h1>
+	<div class="container">
+		<h1>Order a Gift Certificate: Payment</h1>
 
-	<p>We have created a record of your order. To finish the order, please use the button below to pay with PayPal.</p><br><br>
+		<p>We have created a record of your order. To finish the order, please use the button below to pay with PayPal.</p><br><br>
 
-	<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-	<input type="hidden" name="cmd" value="_xclick">
-	<input type="hidden" name="business" value="PREA94899FV3E">
-	<input type="hidden" name="lc" value="CA">
-	<input type="hidden" name="item_name" value="Gift Certificate">
-	<input type="hidden" name="amount" value="{{gc.amount}}">
-	<input type="hidden" name="button_subtype" value="services">
-	<input type="hidden" name="no_note" value="1">
-	<input type="hidden" name="no_shipping" value="1">
-	<input type="hidden" name="rm" value="1">
-	<input type="hidden" name="return" value="https://ogocarshare.ca/gift-certificate/complete">
-	<input type="hidden" name="cancel_return" value="https://ogocarshare.ca/gift-certificate/">
-	<input type="hidden" name="currency_code" value="CAD">
-	<input type="hidden" name="tax_rate" value="0.000">
-	<input type="hidden" name="shipping" value="0.00">
-	<input type="hidden" name="custom" value="{{gc.pk}}">
-	<input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
-	<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-	<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-	</form>
+		<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+		<input type="hidden" name="cmd" value="_xclick">
+		<input type="hidden" name="business" value="PREA94899FV3E">
+		<input type="hidden" name="lc" value="CA">
+		<input type="hidden" name="item_name" value="Gift Certificate">
+		<input type="hidden" name="amount" value="{{gc.amount}}">
+		<input type="hidden" name="button_subtype" value="services">
+		<input type="hidden" name="no_note" value="1">
+		<input type="hidden" name="no_shipping" value="1">
+		<input type="hidden" name="rm" value="1">
+		<input type="hidden" name="return" value="https://ogocarshare.ca/gift-certificate/complete">
+		<input type="hidden" name="cancel_return" value="https://ogocarshare.ca/gift-certificate/">
+		<input type="hidden" name="currency_code" value="CAD">
+		<input type="hidden" name="tax_rate" value="0.000">
+		<input type="hidden" name="shipping" value="0.00">
+		<input type="hidden" name="custom" value="{{gc.pk}}">
+		<input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
+		<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+		<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+		</form>
 
 
-	<br><br>
-	<p>Order summary: <strong>${{gc.amount}}</strong> account credit for <strong>{{gc.recipient_name}}</strong> from {{gc.from_name}} (email: {{gc.from_email}}, phone: {{gc.from_phone}}).</p>
+		<br><br>
+		<p>Order summary: <strong>${{gc.amount}}</strong> account credit for <strong>{{gc.recipient_name}}</strong> from {{gc.from_name}} (email: {{gc.from_email}}, phone: {{gc.from_phone}}).</p>
 
-	{% if gc.notes %}
-	<p>Notes: {{gc.notes}}</p>
-	{% endif %}
-
+		{% if gc.notes %}
+		<p>Notes: {{gc.notes}}</p>
+		{% endif %}
+	</div>
 {% endblock %}
