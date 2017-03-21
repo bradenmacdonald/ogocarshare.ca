@@ -135,7 +135,7 @@ header#mainheader {
 }
 
 // Fix header position when CMS header is visible
-.cms-toolbar-expanded header {
+.cms-toolbar-expanded header#mainheader {
     top: 45px;
 }
 
