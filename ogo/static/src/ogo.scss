@@ -48,7 +48,7 @@ body {
 ////////////////////////////////////////////////////////////////////////////////////////////////
 /// Main header
 
-header {
+header#mainheader {
     position: fixed;
     background-color: rgba(255,255,255, 0.8);
     backdrop-filter: blur(5px);
@@ -230,7 +230,7 @@ section.container {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 /// Main Footer
-footer {
+footer#mainfooter {
     $footer-text-color: white;
     $footer-text-hover-color: black;
 
