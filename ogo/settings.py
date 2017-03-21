@@ -56,7 +56,7 @@ else:
     CACHES = {
         'default': {'BACKEND': 'django.core.cache.backends.locmem.LocMemCache'}
     }
-######################################################################
+########################################################################################################################
 
 DEBUG = LOCAL_SETTINGS['DEBUG']
 
@@ -207,6 +207,14 @@ INSTALLED_APPS = (
     'cmsplugin_youtube',
     'cmsplugin_html',
     'cmsplugin_img',
+    # Blog:
+    'aldryn_apphooks_config',
+    'cmsplugin_filer_image',
+    'parler',
+    'taggit',
+    'taggit_autosuggest',
+    'meta',
+    'djangocms_blog',
     # OGO:
     'ogo.plugins',
     'ogo.giftcert',
@@ -352,3 +360,13 @@ CSE_API_ENDPOINT = LOCAL_SETTINGS['CSE_API_ENDPOINT']
 
 # Google Analytics:
 GOOGLE_ANALYTICS_ACCOUNT = LOCAL_SETTINGS['GOOGLE_ANALYTICS_ACCOUNT']
+
+# Settings required for djangocms-blog:
+THUMBNAIL_PROCESSORS = (
+    'easy_thumbnails.processors.colorspace',
+    'easy_thumbnails.processors.autocrop',
+    'filer.thumbnail_processors.scale_and_crop_with_subject_location',
+    'easy_thumbnails.processors.filters',
+)
+META_SITE_PROTOCOL = 'https' if HTTPS_AVAILABLE else 'http'
+META_USE_SITES = True

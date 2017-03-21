@@ -10,6 +10,8 @@ urlpatterns = [
     url(r'^gift-certificate/', include('ogo.giftcert.urls')),
     # The admin/backend site:
     url(r'^backend/', include(admin.site.urls)),
+    # Tagging for djangocms-blog:
+    url(r'^taggit_autosuggest/', include('taggit_autosuggest.urls')),
     # Anything else is handled by the CMS:
     url(r'^', include('cms.urls')),
 ]

@@ -1,0 +1,17 @@
+{% extends CMS_TEMPLATE %}
+
+{% block meta %}
+    {%  if meta %}
+        {% include "meta/meta.html" %}
+    {% endif %}
+{% endblock meta %}
+
+{% block content_area %}
+    <div class="container">
+        <div class="row">
+            <div class="app app-blog col-md-12">
+                {% block content_blog %}{% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock content_area %}

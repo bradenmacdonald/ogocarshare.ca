@@ -16,4 +16,7 @@ django-bootstrap-form==3.2
 requests==2.13.0
 Pillow==4.0.0
 
+# Django CMS Blog
+djangocms-blog==0.8.12
+
 -e .
