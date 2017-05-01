@@ -4,7 +4,6 @@ import django.forms as forms
 from django.forms import ModelForm
 from django.http import HttpResponsePermanentRedirect
 from django.shortcuts import render
-from django.template import RequestContext
 
 from .models import GiftCert
 
